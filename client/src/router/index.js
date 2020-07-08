@@ -19,10 +19,5 @@ export default new Router({
       name: 'user',
       component: UserProfile,
     },
-    {
-      path: '/createpost',
-      name: 'PostCreation',
-      component: PostCreation,
-    },
   ],
 });
