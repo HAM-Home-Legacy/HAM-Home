@@ -1,7 +1,6 @@
 <template>
   <div class="createpost-container">
     <h1>Create A New Post</h1>
-
     <TextFields />
   </div>
 </template>

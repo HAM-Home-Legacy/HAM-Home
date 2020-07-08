@@ -1,8 +1,11 @@
 const express = require("express");
 
 const router = express.Router();
+const services = require("../../services");
 
-router.get("/users", async (req, res) => {
+router.get("/", async (req, res) => {
+  var allUsers = await services.userService.findAllUsers();
+  res.send(allUsers);
   // try
   // gets all the users
   // await a call a database service
@@ -10,7 +13,7 @@ router.get("/users", async (req, res) => {
   // catch
   // send back an error
 });
-router.get("/users/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   // try
   // get one user
   // catch

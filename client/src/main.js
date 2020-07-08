@@ -1,18 +1,21 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.css';
-import 'vue-material/dist/theme/default.css';
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import VueMaterial from "vue-material";
+import { BootstrapVue } from "bootstrap-vue";
 
-import { BootstrapVue } from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-
-Vue.use(VueMaterial);
-Vue.use(BootstrapVue);
+//Material Vue Css files
+import "vue-material/dist/vue-material.min.css";
+import "vue-material/dist/theme/default.css";
+//Material Theme Css files
+import "vue-material/dist/theme/default-dark.css";
+//Bootstrap Vue Css files
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.config.productionTip = false;
+Vue.use(VueMaterial);
+Vue.use(BootstrapVue);
 
 new Vue({
   router,
