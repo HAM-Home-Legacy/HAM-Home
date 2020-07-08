@@ -57,8 +57,8 @@
         </div>
       </div>
 
-      <md-button class="md-primary md-raised" @click="city = 'pulp-fiction'">Search</md-button>
-      <postView />
+      <md-button class="md-primary md-raised" @click="showPostFunction">Search</md-button>
+      <postView v-if="showPost" />
     </div>
     <h1>Post View</h1>
     <PostView />
@@ -73,8 +73,14 @@ export default {
   data: () => ({
     city: "",
     NumberOfRooms: null,
-    price: null
-  })
+    price: null,
+    showPost: false
+  }),
+  methods: {
+    showPostFunction() {
+      this.showPost = true;
+    }
+  }
 };
 </script>
 
