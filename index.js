@@ -6,7 +6,7 @@ const routes = require("./routes");
 
 app.use(express.static("client/dist"));
 
-app.use("/api", routes.userRoutes);
+app.use("/api/users", routes.userRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/client/dist/index.html");

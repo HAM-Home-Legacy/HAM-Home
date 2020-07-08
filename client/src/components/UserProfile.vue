@@ -4,19 +4,22 @@
       <md-app-toolbar class="md-large md-dense md-default">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button
-              class="md-icon-button"
-              @click="menuVisible = !menuVisible"
-            >
+            <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
               <md-icon>menu</md-icon>
             </md-button>
-            <router-link class="tab-button-contain" to="/user">
-              <md-button class="md-title">Profile</md-button>
+            <router-link class="tab-button-contain2" to="/user">
+              <md-avatar class="md-avatar-icon">
+                <md-icon>home</md-icon>
+              </md-avatar>
+            </router-link>
+            <router-link class="tab-button-contain2" to="/user/search">
+              <md-avatar class="md-avatar-icon">
+                <md-icon>search</md-icon>
+              </md-avatar>
             </router-link>
           </div>
 
           <div class="md-toolbar-section-end">
-            <!-- <md-icon>more_vert</md-icon> -->
             <md-button class="icon-button">Logout</md-button>
           </div>
         </div>
@@ -40,9 +43,7 @@
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0"
-          >Navigation</md-toolbar
-        >
+        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
 
         <md-list>
           <md-list-item>
@@ -69,7 +70,9 @@
 
       <md-app-content>
         <div class="appContent">
-          <router-view />
+          <transition name="fade">
+            <router-view />
+          </transition>
         </div>
       </md-app-content>
     </md-app>
@@ -81,8 +84,9 @@ export default {
   components: {},
   name: "UserProfile",
   data: () => ({
-    menuVisible: false,
+    menuVisible: false
   }),
+  computed: {}
 };
 </script>
 
@@ -104,7 +108,19 @@ export default {
   width: 25%;
   max-width: 25%;
 }
+.tab-button-contain2 {
+  width: 2%;
+  max-width: 2%;
+  background-color: transparent !important;
+  margin-right: 12px;
+  margin-left: 12px;
+}
 .tab-button {
+  width: 100%;
+}
+.router-link-active {
+  background-color: grey;
+  opacity: 0.5;
   width: 100%;
 }
 .icon-button {

@@ -43,6 +43,10 @@ export default new Router({
           path: "saved",
           component: SavedPosts,
         },
+        {
+          path: "search",
+          component: UserPosts,
+        },
       ],
     },
   ],
