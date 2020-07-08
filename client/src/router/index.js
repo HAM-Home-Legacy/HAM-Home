@@ -6,6 +6,7 @@ import UserInfos from "../components/UserInfos.vue";
 import UserPosts from "../components/UserPosts.vue";
 import MakeAPost from "../components/MakeAPost.vue";
 import SavedPosts from "../components/SavedPosts.vue";
+import Search from "../components/Search.vue";
 import Slides from "../components/Slides.vue";
 
 Vue.use(Router);
@@ -49,5 +50,13 @@ export default new Router({
         },
       ],
     },
+    {
+      path: "/search",
+      name: "Search",
+      component: Search,
+
+    },
   ],
 });
+
+
