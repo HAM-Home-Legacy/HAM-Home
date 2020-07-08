@@ -1,27 +1,28 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "../components/Home.vue";
-import UserProfile from "../components/UserProfile.vue";
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '../components/Home.vue';
+import UserProfile from '../components/UserProfile.vue';
+import PostCreation from '../components/PostCreation.vue';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: 'history',
   routes: [
     {
-      path: "/",
-      name: "Home",
+      path: '/',
+      name: 'Home',
       component: Home,
     },
     {
-      path: "/user",
-      name: "user",
+      path: '/user',
+      name: 'user',
       component: UserProfile,
     },
-    // {
-    //     path: "*",
-    //     name: "Not found",
-    //     component: ComponentNotFound,
-    //   },
+    {
+      path: '/createpost',
+      name: 'PostCreation',
+      component: PostCreation,
+    },
   ],
 });
