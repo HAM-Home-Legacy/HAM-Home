@@ -55,7 +55,7 @@
         >
           <b-form-textarea
             id="textarea"
-            v-model="form.desc"
+            v-model="form.description"
             placeholder="Please enter the description here..."
             rows="3"
             max-rows="6"
@@ -100,14 +100,16 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'TextFields',
   data() {
     return {
       form: {
+        title: '',
         numberOfRooms: '',
         state: null,
-        desc: '',
+        description: '',
         file: null,
         price: '0',
       },
@@ -145,12 +147,32 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      // fetch('http://localhost:3000/api/post', {
+      //   method: 'post',
+      // }).then((response) => {
+      //   response.json();
+      // }).then(data =>)
+      axios
+        .post(`http://localhost:3000/api/post`, this.form)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => console.log('Error', err));
     },
     onFileSelected(event) {
       this.form.file = event.target.files[0];
       console.log(this.form.file);
     },
+    // onUpload() {
+
+    // }
+    // postCreation() {
+    //   fetch('http://localhost:3000/api/post', {
+    //     method: 'post',
+    //   }).then((response) => {
+    //     console.log(response);
+    //   });
+    // },
   },
 };
 </script>
