@@ -58,18 +58,23 @@
       </div>
 
       <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
-      <postView v-if="showPost" />
+      <!-- <ul>
+        <li v-for="post in posts">
+        <postView v-if="showPost" />
+        </li>
+      </ul>-->
     </div>
-    <!-- <h1>Post View</h1>
-    <PostView />-->
+    <!-- <div id="Single-Post-Container">
+      <SinglePost />
+    </div>-->
   </div>
 </template>
 
 <script>
-import PostView from "./PostView.vue";
+// import PostView from "./PostView.vue";
 export default {
   name: "search",
-  components: { PostView },
+  // components: { PostView },
   data: () => ({
     city: "",
     NumberOfRooms: null,
@@ -100,6 +105,10 @@ body {
   height: 100vh;
 }
 #SearchBtn {
+  float: right;
+}
+#Single-Post-Container {
+  width: 50%;
   float: right;
 }
 </style>
