@@ -12,9 +12,15 @@
         caption="Welcome To Your Profile. We Hope That You're Enjoying the experience with us."
         img-src="https://picsum.photos/1024/480/?image=221"
       ></b-carousel-slide>
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=238"></b-carousel-slide>
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=1048"></b-carousel-slide>
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=283"></b-carousel-slide>
+      <b-carousel-slide
+        img-src="https://picsum.photos/1024/480/?image=238"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        img-src="https://picsum.photos/1024/480/?image=1048"
+      ></b-carousel-slide>
+      <b-carousel-slide
+        img-src="https://picsum.photos/1024/480/?image=283"
+      ></b-carousel-slide>
     </b-carousel>
   </div>
 </template>
@@ -25,7 +31,7 @@ export default {
   data() {
     return {
       slide: 0,
-      sliding: null
+      sliding: null,
     };
   },
   methods: {
@@ -34,8 +40,8 @@ export default {
     },
     onSlideEnd() {
       this.sliding = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
