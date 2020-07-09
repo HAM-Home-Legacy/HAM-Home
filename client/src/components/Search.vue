@@ -57,11 +57,11 @@
         </div>
       </div>
 
-      <md-button class="md-primary md-raised" @click="city = 'pulp-fiction'">Search</md-button>
-      <postView />
+      <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
+      <postView v-if="showPost" />
     </div>
-    <h1>Post View</h1>
-    <PostView />
+    <!-- <h1>Post View</h1>
+    <PostView />-->
   </div>
 </template>
 
@@ -73,8 +73,14 @@ export default {
   data: () => ({
     city: "",
     NumberOfRooms: null,
-    price: null
-  })
+    price: null,
+    showPost: false
+  }),
+  methods: {
+    showPostFunction() {
+      this.showPost = true;
+    }
+  }
 };
 </script>
 
@@ -92,5 +98,8 @@ body {
   position: relative;
   top: 30%;
   height: 100vh;
+}
+#SearchBtn {
+  float: right;
 }
 </style>
