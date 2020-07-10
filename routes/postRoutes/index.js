@@ -5,7 +5,7 @@ const services = require("../../services");
 
 const Post = require("../../models/post");
 
-router.post("/post", async (req, res) => {
+router.post("/createPost", async (req, res) => {
   try {
     let post = await services.postService.createPost(req.body);
     res.send(post);

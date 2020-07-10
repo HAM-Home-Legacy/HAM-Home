@@ -1,23 +1,23 @@
 <template>
   <div class="createpost-container">
     <h1>Create A New Post</h1>
-    <TextFields />
+    <Form />
   </div>
 </template>
 
 <script>
-import TextFields from '../components/Form.vue';
+import Form from "../components/Form.vue";
 export default {
   components: {
-    TextFields,
+    Form,
   },
-  name: 'PostCreation',
+  name: "PostCreation",
 };
 </script>
 
 <style>
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .createpost-container {
   width: 1400px;
