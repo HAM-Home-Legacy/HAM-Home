@@ -4,7 +4,7 @@
     <b-form class="form">
       <b-col>
         <b-form-group>
-          <label>userName</label>
+          <label>E-Mail</label>
           <b-input
             type="text"
             name="email"
@@ -26,7 +26,7 @@
           />
         </b-form-group>
       </b-col>
-      <label id="errorMessage" disabled>{{error}}</label>
+      <label id="errorMessage" disabled>{{ error }}</label>
       <br />
       <b-button @click="checkUser">Submit</b-button>
     </b-form>
@@ -40,16 +40,15 @@ export default {
   data() {
     return {
       user: {},
-      error: ""
+      error: "",
     };
   },
   methods: {
     async checkUser() {
       if (this.user.email && this.user.password) {
-        console.log(this.user.email, this.user.password);
         let data = await axios.post("/api/users/checkUser", {
           email: this.user.email,
-          password: this.user.password
+          password: this.user.password,
         });
         if (data.data.length > 0) {
           localStorage.setItem("email", data.data[0].email);
@@ -60,9 +59,13 @@ export default {
       } else {
         this.error = "Please type in an e-mail and a username.";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.formm {
+  margin-top: 200px;
+}
+</style>
