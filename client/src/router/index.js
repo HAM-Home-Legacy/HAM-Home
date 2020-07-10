@@ -8,6 +8,7 @@ import UserPosts from "../components/UserPosts.vue";
 import SavedPosts from "../components/SavedPosts.vue";
 import Search from "../components/Search.vue";
 import Slides from "../components/Slides.vue";
+import singlePost from "../components/SinglePost.vue";
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ export default new Router({
         {
           path: "search",
           component: Search,
+        },
+        {
+          path: "singlePost",
+          component: singlePost,
+          props: true
         },
       ],
     },

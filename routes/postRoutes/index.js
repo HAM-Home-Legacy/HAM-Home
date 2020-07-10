@@ -20,6 +20,7 @@ router.post('/', (req, res) => {
 router.post('/search', async (req, res) => {
   try {
     const filteredPosts = await services.postService.findByFilter(req.body)
+    console.log(filteredPosts)
     res.send(filteredPosts)
   } catch (error) {
     res.send(error)

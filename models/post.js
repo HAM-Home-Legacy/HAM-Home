@@ -6,7 +6,7 @@ const postSchema = new Schema({
     type: String,
   },
   numberOfRooms: {
-    type: Number,
+    type: String,
   },
   state: {
     type: String,
@@ -15,7 +15,7 @@ const postSchema = new Schema({
     type: String,
   },
   price: {
-    type: Number,
+    type: String,
   },
   //   userId: { type: mongoose.Schema.Types.ObjectId, ref: User.modelName },
 });

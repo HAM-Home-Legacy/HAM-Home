@@ -12,6 +12,9 @@ export default {
 </script>
 
 <style>
+body, html {
+  overflow:hidden
+}
 #app {
   height: 100vh;
 }
