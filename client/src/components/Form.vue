@@ -103,6 +103,23 @@
       >
     </b-form>
 
+    <form
+      action="http://localhost:3000/api/image"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label for="postImage">PHOTO</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Description"
+        required
+      />
+      <input type="file" name="postImage" id="postImage" />
+      <input type="submit" value="upload" />
+    </form>
+
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
@@ -161,7 +178,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       axios
-        .post(`http://localhost:3000/api/post`, this.form)
+        .post(`http://localhost:3000/api/posts/createPost`, this.form)
         .then((response) => {
           console.log(response);
         })

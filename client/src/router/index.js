@@ -8,7 +8,9 @@ import UserPosts from "../components/UserPosts.vue";
 import SavedPosts from "../components/SavedPosts.vue";
 import Search from "../components/Search.vue";
 import Slides from "../components/Slides.vue";
+import singlePost from "../components/SinglePost.vue";
 import Login from "../components/Login.vue";
+import SignUp from "../components/SignUp.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -23,6 +25,11 @@ export default new Router({
           path: "/login",
           name: "Login",
           component: Login,
+        },
+        {
+          path: "/signup",
+          name: "SignUp",
+          component: SignUp,
         },
       ],
     },
@@ -54,6 +61,11 @@ export default new Router({
         {
           path: "search",
           component: Search,
+        },
+        {
+          path: "singlePost",
+          component: singlePost,
+          props: true
         },
       ],
     },
