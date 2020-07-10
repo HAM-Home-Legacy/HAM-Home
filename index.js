@@ -5,6 +5,12 @@ const PORT = process.env.PORT || 3000;
 const routes = require('./routes');
 require('dotenv').config();
 
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const Image = require('./models/image');
+
 // Connection to DB
 const uri = process.env.URI;
 mongoose.connect(uri, {
@@ -21,20 +27,18 @@ connection.once('open', () => {
 app.use(express.json());
 app.use(express.static('client/dist'));
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+////////////////////////////
+
+////////////////////////////
 
 //users Route
 app.use('/api/users', routes.userRoutes);
 
 //post Route
 app.use('/api/post', routes.postRoutes);
+
+//image Route
+app.use('/api/image', routes.imageRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/client/dist/index.html');
