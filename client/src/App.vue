@@ -12,7 +12,11 @@ export default {
 </script>
 
 <style>
-#app {
-  height: 100vh;
+body {
+  background-color: transparent !important;
+}
+html {
+  overflow: hidden;
+  background-color: transparent !important;
 }
 </style>

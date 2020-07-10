@@ -25,10 +25,18 @@
               id="Number Of Rooms"
               placeholder="Number Of Rooms"
             >
-              <md-option value="2 Bedrooms, 1 Bathroom">1 Bedroom, 1 Bathroom</md-option>
-              <md-option value="3 Bedrooms, 1 Bathroom">2 Bedrooms, 1 Bathroom</md-option>
-              <md-option value="4 Bedrooms, 2 Bathroom">3 Bedrooms, 2 Bathroom</md-option>
-              <md-option value="2 Bedrooms, 3 Bathrooms">4 Bedrooms, 3 Bathrooms</md-option>
+              <md-option value="2 Bedrooms, 1 Bathroom"
+                >1 Bedroom, 1 Bathroom</md-option
+              >
+              <md-option value="3 Bedrooms, 1 Bathroom"
+                >2 Bedrooms, 1 Bathroom</md-option
+              >
+              <md-option value="4 Bedrooms, 2 Bathroom"
+                >3 Bedrooms, 2 Bathroom</md-option
+              >
+              <md-option value="2 Bedrooms, 3 Bathrooms"
+                >4 Bedrooms, 3 Bathrooms</md-option
+              >
             </md-select>
           </md-field>
         </div>
@@ -57,11 +65,16 @@
         </div>
       </div>
 
-      <md-button class="md-primary md-raised" @click="city = 'pulp-fiction'">Search</md-button>
-      <postView />
+      <md-button
+        id="SearchBtn"
+        class="md-primary md-raised"
+        @click="showPostFunction"
+        >Search</md-button
+      >
+      <postView v-if="showPost" />
     </div>
-    <h1>Post View</h1>
-    <PostView />
+    <!-- <h1>Post View</h1>
+    <PostView />-->
   </div>
 </template>
 
@@ -73,17 +86,18 @@ export default {
   data: () => ({
     city: "",
     NumberOfRooms: null,
-    price: null
-  })
+    price: null,
+    showPost: false,
+  }),
+  methods: {
+    showPostFunction() {
+      this.showPost = true;
+    },
+  },
 };
 </script>
 
 <style>
-body {
-  background-image: url("https://picsum.photos/1024/480/?image=283");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .md-layout {
   background-color: gray;
 }
@@ -92,5 +106,8 @@ body {
   position: relative;
   top: 30%;
   height: 100vh;
+}
+#SearchBtn {
+  float: right;
 }
 </style>
