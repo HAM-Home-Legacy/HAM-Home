@@ -92,17 +92,12 @@ export default {
       let filteredPosts = await axios.post("/api/posts/search",obj);
       this.posts = filteredPosts.data;
       this.showPost = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-body {
-  background-image: url("https://picsum.photos/1024/480/?image=283");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .md-layout {
   background-color: gray;
 }

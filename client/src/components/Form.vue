@@ -76,7 +76,7 @@
         <div class="mt-2">Value: {{ form.price }}</div>
       </div>
 
-      <div class="myinput">
+      <!-- <div class="myinput">
         <b-form-file
           v-model="form.file"
           :state="Boolean(form.file)"
@@ -84,8 +84,20 @@
           drop-placeholder="Drop file here..."
           @change="onFileSelected"
         ></b-form-file>
-      </div>
+        <input type="file" style="display:none" />
+      </div> -->
 
+      <div class="myinput">
+        <b-button variant="primary" @click="onPickFile">Upload Image</b-button>
+        <input
+          type="file"
+          style="display:none"
+          ref="fileInput"
+          accept="image/*"
+          @change="onFilePicked"
+        />
+      </div>
+      <img :src="form.imageURL" height="150" />
       <b-button class="createform-submit" type="submit" variant="primary"
         >Submit</b-button
       >
@@ -110,8 +122,9 @@ export default {
         numberOfRooms: '',
         state: null,
         description: '',
-        file: null,
         price: '0',
+        imageURL: '',
+        image: null,
       },
       states: [
         { text: 'Select One', value: null },
@@ -147,11 +160,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      // fetch('http://localhost:3000/api/post', {
-      //   method: 'post',
-      // }).then((response) => {
-      //   response.json();
-      // }).then(data =>)
       axios
         .post(`http://localhost:3000/api/post`, this.form)
         .then((response) => {
@@ -159,20 +167,27 @@ export default {
         })
         .catch((err) => console.log('Error', err));
     },
-    onFileSelected(event) {
-      this.form.file = event.target.files[0];
-      console.log(this.form.file);
-    },
-    // onUpload() {
-
-    // }
-    // postCreation() {
-    //   fetch('http://localhost:3000/api/post', {
-    //     method: 'post',
-    //   }).then((response) => {
-    //     console.log(response);
-    //   });
+    // onFileSelected(event) {
+    //   this.form.file = event.target.files[0];
+    //   console.log(this.form.file);
     // },
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files;
+      let filename = files[0].name;
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file');
+      }
+      const fileReader = new window.FileReader();
+      fileReader.addEventListener('load', () => {
+        this.form.imageURL = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
+      this.form.image = files[0];
+      console.log(this.form.image);
+    },
   },
 };
 </script>
