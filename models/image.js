@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const imageSchema = new Schema({
   img: { data: Buffer, contentType: String },
+
+  photo: { type: String },
 });
 
 module.exports = mongoose.model('image', imageSchema);
