@@ -12,7 +12,9 @@ router.post('/',async(req,res)=>{
     res.send(error);
   }
 })
-router.post("/post", async (req, res) => {
+
+
+router.post("/createPost", async (req, res) => {
   try {
     let post = await services.postService.createPost(req.body);
     res.send(post);

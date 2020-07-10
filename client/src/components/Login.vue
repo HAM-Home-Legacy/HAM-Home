@@ -52,7 +52,8 @@ export default {
         });
         if (data.data.length > 0) {
           localStorage.setItem("email", data.data[0].email);
-          this.$router.push("user");
+          localStorage.setItem("id", data.data[0]._id);
+          this.$router.push(`${data.data[0]._id}`);
         } else {
           this.error = "Invalid E-Mail or username.";
         }
