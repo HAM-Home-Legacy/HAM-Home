@@ -4,6 +4,15 @@ const router = express.Router();
 const services = require("../../services");
 
 const Post = require("../../models/post");
+router.post('/',async(req,res)=>{
+  try {
+    let post = await services.postService.findAllPosts(req.body);
+    res.send(post);
+  } catch (error) {
+    res.send(error);
+  }
+})
+
 
 router.post("/createPost", async (req, res) => {
   try {
@@ -21,5 +30,6 @@ router.post("/search", async (req, res) => {
     res.send(error);
   }
 });
+
 
 module.exports = router;

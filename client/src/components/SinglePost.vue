@@ -1,43 +1,40 @@
 <template>
-  <div>
-    <md-card>
-      <md-card-media></md-card-media>
-      <md-card-header>
-     
-      <br />
-        <div class="md-title">{{post.description}}</div>
-
+  <div >
+     <img
+      src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
+      alt="People"
+      id='singlePost'/>
+      <h1 class="md-description">{{post.description}}</h1>
         <div class="md-subhead">
           {{post.state}}
           <br />
-          <div id="priceInfo">{{post.price}}</div>
+          <h1 id="priceInfo">{{post.price}}</h1>
           <br />
-          <div id="addressInfo">{{post.numberOfRooms}}</div>
+          <h1 id="addressInfo">{{post.NumberOfRooms}}</h1>
         </div>
-    <img
-      src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
-      alt="People"
-      id='img'
-    />
-      </md-card-header>
-    </md-card>
-   
   </div>
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "SinglePost",
-  props: ["post"],
   data: () => ({
     city: "",
     NumberOfRooms: null,
-    price: null
+    price: null,
+    post: []
   }),
+  async beforeMount(){
+    let id = window.location.pathname.slice(6)
+    let foundPost = await axios.post("/api/posts/search", {_id:id});
+    this.post = foundPost.data[0]
+  },
   methods: {
     close(){
       this.showPost = false
-    }
+    },
+ 
   }
 };
 </script>
@@ -49,9 +46,8 @@ export default {
   border-radius: 0px !important;
   margin-top: 40px
 }
-#postInfo {
-  text-align: left;
-  /* margin-left: 20px; */
+#singlePost{
+  float :right
 }
 
 </style>
