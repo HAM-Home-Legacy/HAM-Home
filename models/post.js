@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
@@ -6,7 +6,7 @@ const postSchema = new Schema({
     type: String,
   },
   numberOfRooms: {
-    type: Number,
+    type: String,
   },
   state: {
     type: String,
@@ -15,29 +15,11 @@ const postSchema = new Schema({
     type: String,
   },
   price: {
-    type: Number,
+    type: String,
   },
-  //   userId: { type: mongoose.Schema.Types.ObjectId, ref: User.modelName },
+  email: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model('Post', postSchema);
-
-// // Func to Create a post for testing
-// async function createPost(title, numberOfRooms, state, description, price) {
-//   const post = new Post({
-//     title,
-//     numberOfRooms,
-//     state,
-//     description,
-//     price,
-//   });
-//   const result = await post.save();
-//   console.log(result);
-// }
-
-// createPost(
-//   '1994-05-23',
-//   '08:00 AM',
-//   'Ghazela',
-//   '5efda8a469557a42107407d0'
-// );
+module.exports = mongoose.model("Post", postSchema);

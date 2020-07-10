@@ -6,11 +6,10 @@ const routes = require("./routes");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
-const multer = require('multer');
-const Image = require('./models/image');
+const fs = require("fs");
+const path = require("path");
+const multer = require("multer");
+const Image = require("./models/image");
 
 // Connection to DB
 const uri = process.env.URI;
@@ -25,26 +24,20 @@ connection.once("open", () => {
   console.log("MongoDB connected");
 });
 
-
 app.use(express.static("client/dist"));
 app.use(bodyParser.json());
 
-
-////////////////////////////
-
-////////////////////////////
-
 //users Route
-app.use('/api/users', routes.userRoutes);
+app.use("/api/users", routes.userRoutes);
 
 //post Route
-app.use('/api/posts', routes.postRoutes);
+app.use("/api/posts", routes.postRoutes);
 
 //image Route
-app.use('/api/image', routes.imageRoutes);
+app.use("/api/image", routes.imageRoutes);
 
-app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/client/dist/index.html');
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/client/dist/index.html");
 });
 
 app.listen(PORT, () => {
