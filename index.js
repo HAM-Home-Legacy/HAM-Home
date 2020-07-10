@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use('/api/users', routes.userRoutes);
 
 //post Route
-app.use('/api/post', routes.postRoutes);
+app.use('/api/posts', routes.postRoutes);
 
 //image Route
 app.use('/api/image', routes.imageRoutes);

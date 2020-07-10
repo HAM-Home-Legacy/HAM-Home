@@ -1,5 +1,13 @@
 const Post = require('../../models/post');
 
+module.exports = {
+    async findAllPosts() {
+        return Post.find({})
+    },
+    async findByFilter(filter) {
+        return Post.find(filter)
+    }
+}
 // module.exports = {
 //   async savePost() {
 //     const post = new Post({
@@ -22,3 +30,4 @@ const Post = require('../../models/post');
 //   520
 // );
 // Func to Create a post for testing
+

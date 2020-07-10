@@ -19,78 +19,55 @@
 
         <div class="md-layout-item">
           <md-field>
-            <md-select
-              v-model="Rooms"
-              name=" Number Of Rooms"
+            <md-input
+              v-model="NumberOfRooms"
+              name="Number Of Rooms"
               id="Number Of Rooms"
-              placeholder="Number Of Rooms"
-            >
-              <md-option value="2 Bedrooms, 1 Bathroom"
-                >1 Bedroom, 1 Bathroom</md-option
-              >
-              <md-option value="3 Bedrooms, 1 Bathroom"
-                >2 Bedrooms, 1 Bathroom</md-option
-              >
-              <md-option value="4 Bedrooms, 2 Bathroom"
-                >3 Bedrooms, 2 Bathroom</md-option
-              >
-              <md-option value="2 Bedrooms, 3 Bathrooms"
-                >4 Bedrooms, 3 Bathrooms</md-option
-              >
-            </md-select>
+              type="number"
+              step="1"
+            ></md-input>
           </md-field>
         </div>
 
         <div class="md-layout-item">
           <md-field>
             <label for="price">Price</label>
-            <md-select v-model="price" name="price" id="price">
-              <md-option value="200-300$">200-300$</md-option>
-              <md-option value="300-400$">300-400$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-              <md-option value="400-500$">400-500$</md-option>
-            </md-select>
+            <md-input v-model="price" name="price" id="price" type="number" step="100"></md-input>
           </md-field>
         </div>
       </div>
 
-      <md-button
-        id="SearchBtn"
-        class="md-primary md-raised"
-        @click="showPostFunction"
-        >Search</md-button
-      >
-      <postView v-if="showPost" />
+      <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
+      <postView myData='hello' v-if="showPost"  posts="posts" />
     </div>
-    <!-- <h1>Post View</h1>
-    <PostView />-->
+    <!-- <div id="Single-Post-Container">
+      <SinglePost />
+    </div>-->
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import PostView from "./PostView.vue";
 export default {
   name: "search",
   components: { PostView },
   data: () => ({
     city: "",
-    NumberOfRooms: null,
-    price: null,
+    NumberOfRooms: 1,
+    price: 0,
     showPost: false,
+    posts: []
   }),
   methods: {
-    showPostFunction() {
+    async showPostFunction() {
+      let filteredPosts = await axios.post("/api/posts/search", {
+        state: this.city,
+        numberOfRooms: this.NumberOfRooms,
+        price: this.price
+      });
+      this.posts = filteredPosts.data;
+      console.log(this.posts);
       this.showPost = true;
     },
   },
@@ -108,6 +85,10 @@ export default {
   height: 100vh;
 }
 #SearchBtn {
+  float: right;
+}
+#Single-Post-Container {
+  width: 50%;
   float: right;
 }
 </style>
