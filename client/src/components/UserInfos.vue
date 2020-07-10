@@ -4,7 +4,12 @@
       <b-col sm="3" id="col1">
         <b-card id="card">
           <div id="profile-image" class="bg-secondary text-light">
-            <b-img id="profile-image" :src="getMaleImg" fluid alt="Responsive image"></b-img>
+            <b-img
+              id="profile-image"
+              :src="getMaleImg"
+              fluid
+              alt="Responsive image"
+            ></b-img>
           </div>
         </b-card>
       </b-col>
@@ -17,9 +22,7 @@
                   <b-row id="row-infos1">
                     <b-col id="profile-name">
                       <label id="profile-name-label" v-if="!editMode">
-                        {{
-                        user.fullName
-                        }}
+                        {{ user.fullName }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -33,9 +36,7 @@
                     <b-col id="infos-part1">
                       <label id="profile-Birthday-label1">Birthday:</label>
                       <label v-if="!editMode" id="profile-Birthday-label2">
-                        {{
-                        user.dateOfBirth
-                        }}
+                        {{ user.dateOfBirth }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -46,34 +47,19 @@
                       <br />
                       <label id="profile-Age-label1">Age:</label>
                       <label v-if="!editMode" id="profile-Age-label2">
-                        {{
-                        2020 -
-                        Number(
-                        user.dateOfBirth.slice(user.dateOfBirth.length - 4)
-                        )
-                        }}
+                        {{ 2020 - Number(user.dateOfBirth.slice(0, 4)) }}
                       </label>
                       <b-input
                         disabled
                         @input="isChanged = true"
                         v-else
                         id="profile-Age-input"
-                        :value="
-                          2020 -
-                            Number(
-                              user.dateOfBirth.slice(
-                                user.dateOfBirth.length - 4
-                              )
-                            )
-                        "
+                        :value="2020 - Number(user.dateOfBirth.slice(0, 4))"
                       ></b-input>
-
                       <br />
                       <label id="profile-Residence-label1">Residence:</label>
                       <label v-if="!editMode" id="profile-Residence-label2">
-                        {{
-                        user.state
-                        }}
+                        {{ user.state }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -83,20 +69,16 @@
                       ></b-input>
                       <b-button
                         v-if="isChanged && editMode"
-                        @click="
-                          editMode = false;
-                          isChanged = false;
-                        "
+                        @click="dismiss2"
                         variant="outline-danger"
                         id="dismiss2-button"
-                      >Dismiss</b-button>
+                        >Dismiss</b-button
+                      >
                     </b-col>
                     <b-col id="infos-part2">
                       <label id="profile-Address-label1">Address:</label>
                       <label v-if="!editMode" id="profile-Address-label2">
-                        {{
-                        user.address
-                        }}
+                        {{ user.address }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -107,9 +89,7 @@
                       <br />
                       <label id="profile-E-mail-label1">E-mail:</label>
                       <label v-if="!editMode" id="profile-E-mail-label2">
-                        {{
-                        user.email
-                        }}
+                        {{ user.email }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -120,9 +100,7 @@
                       <br />
                       <label id="profile-Phone-label1">Phone Number:</label>
                       <label v-if="!editMode" id="profile-Phone-label2">
-                        {{
-                        user.phoneNumber
-                        }}
+                        {{ user.phoneNumber }}
                       </label>
                       <b-input
                         @input="isChanged = true"
@@ -144,13 +122,15 @@
                         @click="editMode = false"
                         variant="outline-danger"
                         id="dismiss-button"
-                      >Dismiss</b-button>
+                        >Dismiss</b-button
+                      >
                       <b-button
                         v-else-if="isChanged"
                         @click="updateUser"
                         variant="outline-primary"
                         id="save-button"
-                      >Save</b-button>
+                        >Save</b-button
+                      >
                     </b-col>
                   </b-row>
                 </div>
@@ -163,11 +143,21 @@
                 <div id="profile-posts-infos" class="bg-secondary text-light">
                   <b-row>
                     <b-col id="posts-number">
-                      <b-img id="posts-image1" :src="getPostsImg" fluid alt="Responsive image"></b-img>
+                      <b-img
+                        id="posts-image1"
+                        :src="getPostsImg"
+                        fluid
+                        alt="Responsive image"
+                      ></b-img>
                       <label id="posts-number-label">0</label>
                     </b-col>
                     <b-col id="posts-rent-number">
-                      <b-img id="posts-image2" :src="getRentImg" fluid alt="Responsive image"></b-img>
+                      <b-img
+                        id="posts-image2"
+                        :src="getRentImg"
+                        fluid
+                        alt="Responsive image"
+                      ></b-img>
                       <label id="posts-rent-label">0</label>
                     </b-col>
                   </b-row>
@@ -189,7 +179,7 @@ export default {
     return {
       user: {},
       editMode: false,
-      isChanged: false
+      isChanged: false,
     };
   },
   computed: {
@@ -208,15 +198,14 @@ export default {
     getEditImg() {
       var images = require.context("../assets", false, /\.png$/);
       return images("./edit.png");
-    }
+    },
   },
   async beforeMount() {
     try {
-      let user = await axios.post("/api/users/user", {
-        email: localStorage.email
+      let data = await axios.post("/api/users/user", {
+        email: localStorage.email,
       });
-      console.log(user);
-      this.user = user.data[0];
+      this.user = data.data[0];
     } catch (error) {
       console.log(error);
     }
@@ -226,8 +215,16 @@ export default {
       axios.put("/api/users/updateUser", this.user);
       this.editMode = false;
       this.isChanged = false;
-    }
-  }
+    },
+    async dismiss2() {
+      let data = await axios.post("/api/users/user", {
+        email: localStorage.email,
+      });
+      this.user = data.data[0];
+      this.editMode = false;
+      this.isChanged = false;
+    },
+  },
 };
 </script>
 

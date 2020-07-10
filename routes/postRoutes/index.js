@@ -1,29 +1,24 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
-const services = require('../../services');
+const services = require("../../services");
 
-const Post = require('../../models/post');
+const Post = require("../../models/post");
 
-router.post('/', (req, res) => {
-  var post = new Post(req.body);
-  post.save((err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-    }
-  });
-  res.end();
-  // });
-});
-router.post('/search', async (req, res) => {
+router.post("/post", async (req, res) => {
   try {
-    const filteredPosts = await services.postService.findByFilter(req.body)
-    console.log(filteredPosts)
-    res.send(filteredPosts)
+    let post = await services.postService.createPost(req.body);
+    res.send(post);
   } catch (error) {
-    res.send(error)
+    res.send(error);
+  }
+});
+router.post("/search", async (req, res) => {
+  try {
+    const filteredPosts = await services.postService.findByFilter(req.body);
+    res.send(filteredPosts);
+  } catch (error) {
+    res.send(error);
   }
 });
 
