@@ -1,9 +1,16 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
-const routes = require('./routes');
-require('dotenv').config();
+const routes = require("./routes");
+const bodyParser = require("body-parser");
+require("dotenv").config();
+
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const Image = require('./models/image');
 
 // Connection to DB
 const uri = process.env.URI;
@@ -14,21 +21,18 @@ mongoose.connect(uri, {
 });
 
 const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB connected');
+connection.once("open", () => {
+  console.log("MongoDB connected");
 });
 
-app.use(express.json());
-app.use(express.static('client/dist'));
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+app.use(express.static("client/dist"));
+app.use(bodyParser.json());
+
+
+////////////////////////////
+
+////////////////////////////
 
 //users Route
 app.use('/api/users', routes.userRoutes);
@@ -36,10 +40,13 @@ app.use('/api/users', routes.userRoutes);
 //post Route
 app.use('/api/posts', routes.postRoutes);
 
+//image Route
+app.use('/api/image', routes.imageRoutes);
+
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/client/dist/index.html');
 });
 
 app.listen(PORT, () => {
-  console.log('App is listetning on PORT', PORT);
+  console.log("App is listetning on PORT", PORT);
 });
