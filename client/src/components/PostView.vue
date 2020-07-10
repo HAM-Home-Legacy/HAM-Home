@@ -1,6 +1,6 @@
 <template>
   <div class="PostView">
-    <h1>{{myData}} world</h1>
+  <div id='without-extra'>
     <md-card>
       <md-card-media>
         <img
@@ -12,34 +12,26 @@
       <md-card-header>
         <div class="md-title"></div>
         <div class="md-subhead">
-          <div v-for="(item, index)  in posts" :key="index">
-            {{item.state}}
+        <div id="addressInfo">{{post.description}}</div>
+          <div id="stateInfo">{{post.state}}</div>
             <br />
-            <div id="priceInfo"></div>
+            <div id="priceInfo">Price: {{post.price}}$</div>
 
             <br />
-            <div id="addressInfo">{{item.numberOfRooms}}</div>
-          </div>
+            <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
+          
         </div>
       </md-card-header>
-
-      <md-card-expand>
         <md-card-actions md-alignment="space-between">
-          <div>
-            <!-- <md-button>Favourite</md-button> -->
-          </div>
-
-          <!-- <md-card-expand-trigger> -->
-          <md-button @click="showPostFunction">Read more</md-button>
-          <!-- </md-card-expand-trigger> -->
+        <router-link id="readMoreBtn" to="/user/singlePost">
+          <md-button @click="showSinglePostFunction">Read more</md-button>
+        </router-link>
         </md-card-actions>
-
-        <md-card-expand-content>
-          <md-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.</md-card-content>
-        </md-card-expand-content>
-      </md-card-expand>
     </md-card>
-    <SinglePost v-if="showPost" />
+    <div v-for="(post,index) in posts" :key='index'>
+      <SinglePost v-if="showSinglePost" :post="post"/>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -48,28 +40,30 @@ import SinglePost from "./SinglePost.vue";
 export default {
   name: "PostView",
   components: { SinglePost },
-  props: ["myData"],
+  props: ["post"],
   data: () => ({
-    showPost: false
+    showSinglePost: false,
+    city : null,
+    numberOfRooms : null,
+    price: null
   }),
   methods: {
-    showPostFunction() {
-      this.showPost = true;
-      console.log(this.props);
-    }
-  }
+    showSinglePostFunction() {
+      this.showSinglePost = true;
+    },
+  },
 };
 </script>
 
 <style>
-.PostView {
-  height: 480px;
+.PostView{
+  float:left;
+  width:20%;
 }
-
 .md-card {
   width: 320px;
   margin: 8px;
-  display: inline-block;
+  height:550px;
   vertical-align: top;
 }
 .md-subhead {
@@ -86,5 +80,53 @@ export default {
   font-size: 18px;
   color: white;
   font-weight: bold;
+}
+#readMoreBtn{
+  margin: auto;
+  position:relative;
+  top:50%;
+  margin-top: 50px;
+  margin-left: 200px;
+}
+#extra{
+  z-index:1
+}
+.aa2 {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  margin-left: 50px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /* overflow: auto; Enable scroll if needed */
+  background-color: red;
+}
+p {
+  color: #666;
+  line-height: 1.9;
+}
+/* Modal Content/Box */
+.aa3 {
+  background-color: #FEFEFE;
+  border-radius: 8px;
+  margin: 25% auto;
+  padding: 20px;
+  border: 1px solid white;
+  width: 50%;
+}
+/* The Close Button */
+.close2 {
+  color: black;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+  width: 1%;
+}
+.close2:hover,
+.close2:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
