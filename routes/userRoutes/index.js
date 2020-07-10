@@ -21,6 +21,7 @@ router.post("/user", async (req, res) => {
 });
 router.post("/createUser", async (req, res) => {
   try {
+    console.log(req.body);
     const user = await services.userService.createUser(req.body);
     res.send(user);
   } catch (error) {
