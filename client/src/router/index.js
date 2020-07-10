@@ -63,7 +63,7 @@ export default new Router({
           component: Search,
         },
         {
-          path: "singlePost",
+          path: ":id",
           component: singlePost,
           props: true
         },

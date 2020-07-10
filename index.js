@@ -10,7 +10,6 @@ const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const Image = require("./models/image");
-
 // Connection to DB
 const uri = process.env.URI;
 mongoose.connect(uri, {
@@ -24,6 +23,7 @@ connection.once("open", () => {
   console.log("MongoDB connected");
 });
 
+app.use(express.static('uploads'))
 app.use(express.static("client/dist"));
 app.use(bodyParser.json());
 

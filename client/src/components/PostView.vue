@@ -3,16 +3,19 @@
   <div id='without-extra'>
     <md-card>
       <md-card-media>
-        <img
-          src="https://i2.au.reastatic.net/800x600/372f291aefc16b58741894f3e6997878d9bb3d7924243e7cc311487fc1340547/main.jpg"
-          alt="People"
-        />
+       <img
+      src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
+      alt="People"
+      id='singlePost'/>
       </md-card-media>
 
       <md-card-header>
         <div class="md-title"></div>
         <div class="md-subhead">
-        <div id="addressInfo">{{post.description}}</div>
+        <div id="TitleInfo">{{post.title}}</div>
+        <br />
+        <div id="DescriptionInfo">{{post.description}}</div>
+        <br />
           <div id="stateInfo">{{post.state}}</div>
             <br />
             <div id="priceInfo">Price: {{post.price}}$</div>
@@ -21,16 +24,15 @@
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
           
         </div>
+        <br />
       </md-card-header>
         <md-card-actions md-alignment="space-between">
-        <router-link id="readMoreBtn" to="/user/singlePost">
+        <router-link :to="{path:`/user/${post._id}` }" id="readMoreBtn">
           <md-button @click="showSinglePostFunction">Read more</md-button>
         </router-link>
         </md-card-actions>
     </md-card>
-    <div v-for="(post,index) in posts" :key='index'>
       <SinglePost v-if="showSinglePost" :post="post"/>
-    </div>
   </div>
   </div>
 </template>
@@ -40,7 +42,7 @@ import SinglePost from "./SinglePost.vue";
 export default {
   name: "PostView",
   components: { SinglePost },
-  props: ["post"],
+  props:['post'],
   data: () => ({
     showSinglePost: false,
     city : null,
@@ -59,6 +61,7 @@ export default {
 .PostView{
   float:left;
   width:20%;
+  margin-top: 40px;
 }
 .md-card {
   width: 320px;
