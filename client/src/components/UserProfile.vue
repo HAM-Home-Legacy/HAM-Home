@@ -20,7 +20,7 @@
           </div>
 
           <div class="md-toolbar-section-end">
-            <md-button class="icon-button">Logout</md-button>
+            <md-button @click="logout" class="icon-button">Logout</md-button>
           </div>
         </div>
 
@@ -86,7 +86,12 @@ export default {
   data: () => ({
     menuVisible: false
   }),
-  computed: {}
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 
