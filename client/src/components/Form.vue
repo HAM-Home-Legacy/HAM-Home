@@ -129,46 +129,46 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'TextFields',
+  name: "TextFields",
   data() {
     return {
       form: {
-        title: '',
-        numberOfRooms: '',
+        title: "",
+        numberOfRooms: "",
         state: null,
-        description: '',
-        price: '0',
-        imageURL: '',
+        description: "",
+        price: "0",
+        imageURL: "",
         image: null,
       },
       states: [
-        { text: 'Select One', value: null },
-        'Ariana',
-        'Tunis',
-        'Ben Arous',
-        'Bizerte',
-        'Gabès',
-        'Gafsa',
-        'Jendouba',
-        'Kairouan',
-        'Kasserine',
-        'Kébili',
-        'Le Kef',
-        'Mahdia',
-        'La Manouba',
-        'Médenine',
-        'Monastir',
-        'Nabeul',
-        'Sfax',
-        'Sidi Bouzid',
-        'Siliana',
-        'Sousse',
-        'Tataouine',
-        'Tozeur',
-        'Béja',
-        'Zaghouan',
+        { text: "Select One", value: null },
+        "Ariana",
+        "Tunis",
+        "Ben Arous",
+        "Bizerte",
+        "Gabès",
+        "Gafsa",
+        "Jendouba",
+        "Kairouan",
+        "Kasserine",
+        "Kébili",
+        "Le Kef",
+        "Mahdia",
+        "La Manouba",
+        "Médenine",
+        "Monastir",
+        "Nabeul",
+        "Sfax",
+        "Sidi Bouzid",
+        "Siliana",
+        "Sousse",
+        "Tataouine",
+        "Tozeur",
+        "Béja",
+        "Zaghouan",
       ],
 
       show: true,
@@ -177,12 +177,7 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      axios
-        .post(`http://localhost:3000/api/posts/createPost`, this.form)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => console.log('Error', err));
+      axios.post("http://localhost:3000/api/posts/createPost", this.form);
     },
     // onFileSelected(event) {
     //   this.form.file = event.target.files[0];
@@ -194,11 +189,11 @@ export default {
     onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
-      if (filename.lastIndexOf('.') <= 0) {
-        return alert('Please add a valid file');
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file");
       }
       const fileReader = new window.FileReader();
-      fileReader.addEventListener('load', () => {
+      fileReader.addEventListener("load", () => {
         this.form.imageURL = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);

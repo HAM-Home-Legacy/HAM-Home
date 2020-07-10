@@ -27,6 +27,7 @@ connection.once('open', () => {
 
 app.use(cors());
 app.use(express.static('client/dist'));
+app.use(express.static('uploads'))
 app.use(bodyParser.json());
 
 //users Route
