@@ -17,6 +17,13 @@ router.post('/', (req, res) => {
   res.end();
   // });
 });
-router.get('/:id', (req, res) => {});
+router.post('/search', async (req, res) => {
+  try {
+    const filteredPosts = await services.postService.findByFilter(req.body)
+    res.send(filteredPosts)
+  } catch (error) {
+    res.send(error)
+  }
+});
 
 module.exports = router;

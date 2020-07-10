@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 app.use('/api/users', routes.userRoutes);
 
 //post Route
-app.use('/api/post', routes.postRoutes);
+app.use('/api/posts', routes.postRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/client/dist/index.html');

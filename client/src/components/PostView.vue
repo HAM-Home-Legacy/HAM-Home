@@ -1,6 +1,6 @@
 <template>
   <div class="PostView">
-    <h1>Post View</h1>
+    <h1>{{myData}} world</h1>
     <md-card>
       <md-card-media>
         <img
@@ -10,14 +10,16 @@
       </md-card-media>
 
       <md-card-header>
-        <div class="md-title">Dream House</div>
+        <div class="md-title"></div>
         <div class="md-subhead">
-          Amazing house with 3 bedrooms and 2 bathrooms
-          <br />
-          <div id="priceInfo">Price : 900$</div>
+          <div v-for="(item, index)  in posts" :key="index">
+            {{item.state}}
+            <br />
+            <div id="priceInfo"></div>
 
-          <br />
-          <div id="addressInfo">Address: "2345, Main St, E1A 1B3"</div>
+            <br />
+            <div id="addressInfo">{{item.numberOfRooms}}</div>
+          </div>
         </div>
       </md-card-header>
 
@@ -46,12 +48,14 @@ import SinglePost from "./SinglePost.vue";
 export default {
   name: "PostView",
   components: { SinglePost },
+  props: ["myData"],
   data: () => ({
     showPost: false
   }),
   methods: {
     showPostFunction() {
       this.showPost = true;
+      console.log(this.props);
     }
   }
 };
