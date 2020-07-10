@@ -34,7 +34,7 @@ export default new Router({
       ],
     },
     {
-      path: "/user",
+      path: "/:id",
       name: "user",
       component: UserProfile,
       children: [
@@ -65,7 +65,7 @@ export default new Router({
         {
           path: "singlePost",
           component: singlePost,
-          props: true
+          props: true,
         },
       ],
     },
