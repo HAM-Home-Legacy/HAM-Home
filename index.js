@@ -19,13 +19,28 @@ connection.once("open", () => {
   console.log("MongoDB connected");
 });
 
+
 app.use(express.static("client/dist"));
 app.use(bodyParser.json());
 
-app.use("/api/users", routes.userRoutes);
 
-app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/client/dist/index.html");
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
+//users Route
+app.use('/api/users', routes.userRoutes);
+
+//post Route
+app.use('/api/post', routes.postRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/client/dist/index.html');
 });
 
 app.listen(PORT, () => {
