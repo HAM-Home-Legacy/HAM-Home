@@ -87,7 +87,7 @@
         <input type="file" style="display:none" />
       </div> -->
 
-      <div class="myinput">
+      <!-- <div class="myinput">
         <b-button variant="primary" @click="onPickFile">Upload Image</b-button>
         <input
           type="file"
@@ -97,7 +97,7 @@
           @change="onFilePicked"
         />
       </div>
-      <img :src="form.imageURL" height="150" />
+      <img :src="form.imageURL" height="150" /> -->
       <b-button class="createform-submit" type="submit" variant="primary"
         >Submit</b-button
       >
@@ -116,7 +116,12 @@
         placeholder="Description"
         required
       />
-      <input type="file" name="postImage" id="postImage" />
+      <input
+        type="file"
+        name="postImage"
+        id="postImage"
+        @change="onFilePicked"
+      />
       <input type="submit" value="upload" />
     </form>
 
@@ -140,7 +145,6 @@ export default {
         state: null,
         description: '',
         price: '0',
-        imageURL: '',
         image: null,
       },
       states: [
@@ -202,7 +206,7 @@ export default {
         this.form.imageURL = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
-      this.form.image = files[0];
+      this.form.image = files[0].name;
       console.log(this.form.image);
     },
   },
