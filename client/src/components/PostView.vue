@@ -1,25 +1,19 @@
 <template>
   <div class="PostView">
-  <div id='without-extra'>
-    <md-card>
-      <md-card-media>
-       <img
-      src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
-      alt="People"
-      id='singlePost'/>
-      </md-card-media>
 
-      <md-card-header>
-        <div class="md-title"></div>
-        <div class="md-subhead">
-        <div id="textInfo">
-        <div id="TitleInfo">{{post.title}}</div>
-        <br />
-        <div id="DescriptionInfo">{{post.description}}</div>
-        <br />
-          <div id="stateInfo">{{post.state}}</div>
+    <div id="without-extra">
+      <md-card>
+        <md-card-media>
+          <img :src="'http://localhost:3000/' + post.image" alt="People" />
+        </md-card-media>
+
+        <md-card-header>
+          <div class="md-title"></div>
+          <div class="md-subhead">
+            <div id="addressInfo">{{ post.description }}</div>
+            <div id="stateInfo">{{ post.state }}</div>
             <br />
-            <div id="priceInfo">Price: {{post.price}}$</div>
+            <div id="priceInfo">Price: {{ post.price }}$</div>
 
             <br />
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
@@ -35,20 +29,19 @@
     </md-card>
       <SinglePost v-if="showSinglePost" :post="post"/>
   </div>
-  </div>
 </template>
 
 <script>
-import SinglePost from "./SinglePost.vue";
+import SinglePost from './SinglePost.vue';
 export default {
-  name: "PostView",
+  name: 'PostView',
   components: { SinglePost },
-  props:['post'],
+  props: ['post'],
   data: () => ({
     showSinglePost: false,
-    city : null,
-    numberOfRooms : null,
-    price: null
+    city: null,
+    numberOfRooms: null,
+    price: null,
   }),
   methods: {
     showSinglePostFunction() {
@@ -67,7 +60,7 @@ export default {
 .md-card {
   width: 320px;
   margin: 8px;
-  height:550px;
+  height: 550px;
   vertical-align: top;
 }
 .md-subhead {
@@ -78,15 +71,15 @@ export default {
   font-size: 20px;
   color: white;
 }
-#readMoreBtn{
+#readMoreBtn {
   margin: auto;
-  position:relative;
-  top:50%;
+  position: relative;
+  top: 50%;
   margin-top: 50px;
   margin-left: 200px;
 }
-#extra{
-  z-index:1
+#extra {
+  z-index: 1;
 }
 .aa2 {
   position: fixed; /* Stay in place */
@@ -105,7 +98,7 @@ p {
 }
 /* Modal Content/Box */
 .aa3 {
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   border-radius: 8px;
   margin: 25% auto;
   padding: 20px;

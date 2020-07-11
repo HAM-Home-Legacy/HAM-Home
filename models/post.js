@@ -21,7 +21,7 @@ const postSchema = new Schema({
   email: {
     type: String,
   },
-  image : {
+  image: {
     type: String,
   },
 });

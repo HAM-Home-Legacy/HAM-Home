@@ -145,6 +145,9 @@ export default {
         state: null,
         description: '',
         price: '0',
+        description: "",
+        price: "0",
+        imageURL: "",
         image: null,
       },
       states: [
