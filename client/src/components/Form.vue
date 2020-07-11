@@ -75,7 +75,7 @@
         <input type="file" style="display:none" />
       </div>-->
 
-      <div class="myinput">
+      <!-- <div class="myinput">
         <b-button variant="primary" @click="onPickFile">Upload Image</b-button>
         <input
           type="file"
@@ -85,15 +85,28 @@
           @change="onFilePicked"
         />
       </div>
-      <img :src="form.imageURL" height="150" />
-      <b-button class="createform-submit" type="submit" variant="primary">Submit</b-button>
+
+      <img :src="form.imageURL" height="150" /> -->
+      <b-button class="createform-submit" type="submit" variant="primary"
+        >Submit</b-button
+      >
     </b-form>
 
     <form action="http://localhost:3000/api/image" method="POST" enctype="multipart/form-data">
       <label for="postImage">PHOTO</label>
-      <input type="text" name="name" id="name" placeholder="Description" required />
-      <input type="file" name="postImage" id="postImage" />
-      <!-- <input :value="this.form.description" name="description" id="description" /> -->
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Description"
+        required
+      />
+      <input
+        type="file"
+        name="postImage"
+        id="postImage"
+        @change="onFilePicked"
+      />
       <input type="submit" value="upload" />
     </form>
 
@@ -102,53 +115,60 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 export default {
-  name: "TextFields",
+  name: 'TextFields',
   data() {
     return {
       form: {
-        title: "",
-        numberOfRooms: "",
+        title: '',
+        numberOfRooms: '',
         state: null,
+        description: '',
+        price: '0',
         description: "",
         price: "0"
       },
       states: [
-        { text: "Select One", value: null },
-        "Ariana",
-        "Tunis",
-        "Ben Arous",
-        "Bizerte",
-        "Gabès",
-        "Gafsa",
-        "Jendouba",
-        "Kairouan",
-        "Kasserine",
-        "Kébili",
-        "Le Kef",
-        "Mahdia",
-        "La Manouba",
-        "Médenine",
-        "Monastir",
-        "Nabeul",
-        "Sfax",
-        "Sidi Bouzid",
-        "Siliana",
-        "Sousse",
-        "Tataouine",
-        "Tozeur",
-        "Béja",
-        "Zaghouan"
-      ],
 
-      show: true
+        { text: 'Select One', value: null },
+        'Ariana',
+        'Tunis',
+        'Ben Arous',
+        'Bizerte',
+        'Gabès',
+        'Gafsa',
+        'Jendouba',
+        'Kairouan',
+        'Kasserine',
+        'Kébili',
+        'Le Kef',
+        'Mahdia',
+        'La Manouba',
+        'Médenine',
+        'Monastir',
+        'Nabeul',
+        'Sfax',
+        'Sidi Bouzid',
+        'Siliana',
+        'Sousse',
+        'Tataouine',
+        'Tozeur',
+        'Béja',
+        'Zaghouan',
+      ],
+      show: true,
     };
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      axios.post("http://localhost:3000/api/posts/createPost", this.form);
+      axios
+        .post(`http://localhost:3000/api/posts/createPost`, this.form)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => console.log('Error', err));
     },
     // onFileSelected(event) {
     //   this.form.file = event.target.files[0];
@@ -160,15 +180,15 @@ export default {
     onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
-      if (filename.lastIndexOf(".") <= 0) {
-        return alert("Please add a valid file");
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file');
       }
       const fileReader = new window.FileReader();
-      fileReader.addEventListener("load", () => {
+      fileReader.addEventListener('load', () => {
         this.form.imageURL = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
-      this.form.image = files[0];
+      this.form.image = files[0].name;
       console.log(this.form.image);
     }
   }
@@ -185,12 +205,10 @@ export default {
   float: right;
   margin: 10px;
 }
-
 .myinput {
   width: 400px;
   margin: 30px;
 }
-
 .mycustom {
   width: 600px;
   margin: 30px;

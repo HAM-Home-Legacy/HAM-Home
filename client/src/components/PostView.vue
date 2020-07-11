@@ -3,23 +3,16 @@
     <div id="without-extra">
       <md-card>
         <md-card-media>
-          <img
-            src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
-            alt="People"
-            id="singlePost"
-          />
+          <img :src="'http://localhost:3000/' + post.image" alt="People" />
         </md-card-media>
 
         <md-card-header>
           <div class="md-title"></div>
           <div class="md-subhead">
-            <div id="TitleInfo">{{post.title}}</div>
+            <div id="addressInfo">{{ post.description }}</div>
+            <div id="stateInfo">{{ post.state }}</div>
             <br />
-            <div id="DescriptionInfo">{{post.description}}</div>
-            <br />
-            <div id="stateInfo">{{post.state}}</div>
-            <br />
-            <div id="priceInfo">Price: {{post.price}}$</div>
+            <div id="priceInfo">Price: {{ post.price }}$</div>
 
             <br />
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
@@ -35,6 +28,7 @@
       </md-card>
       <!-- <SinglePost v-if="showSinglePost" :post="post" /> -->
     </div>
+
   </div>
 </template>
 
@@ -43,11 +37,13 @@ import axios from "axios";
 export default {
   name: "PostView",
   props: ["post", "owner"],
+
   data: () => ({
     showSinglePost: false,
     city: null,
     numberOfRooms: null,
     price: null
+
   }),
   methods: {
     showSinglePostFunction() {
@@ -84,16 +80,9 @@ export default {
   height: 100px;
   max-height: 100px;
 }
-#priceInfo {
-  font-size: 25px;
+#textInfo {
+  font-size: 20px;
   color: white;
-  font-weight: bold;
-}
-
-#addressInfo {
-  font-size: 18px;
-  color: white;
-  font-weight: bold;
 }
 #readMoreBtn,
 #saveBtn {
@@ -101,6 +90,7 @@ export default {
 }
 #readMoreBtn {
   float: right;
+
 }
 #extra {
   z-index: 1;

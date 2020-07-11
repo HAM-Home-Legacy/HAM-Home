@@ -51,7 +51,13 @@
         <div class="md-layout-item">
           <md-field>
             <label for="price">Price</label>
-            <md-input v-model="price" name="price" id="price" type="number" step="100"></md-input>
+            <md-input
+              v-model="price"
+              name="price"
+              id="price"
+              type="number"
+              step="100"
+            ></md-input>
           </md-field>
         </div>
         <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
@@ -66,18 +72,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import PostView from "./PostView.vue";
-// import $ from 'jquery'
+import axios from 'axios';
+import PostView from './PostView.vue';
 export default {
-  name: "search",
+  name: 'search',
   components: { PostView },
   data: () => ({
-    city: "",
-    numberOfRooms: "",
-    price: "",
+    city: '',
+    numberOfRooms: '',
+    price: '',
     showPost: false,
-    posts: []
+    posts: [],
   }),
   async beforeMount() {
     try {
@@ -100,6 +105,7 @@ export default {
         obj["price"] = this.price;
       }
       let filteredPosts = await axios.post("/api/posts/search", obj);
+
       this.posts = filteredPosts.data;
       this.showPost = true;
       console.log(this.posts);
@@ -113,6 +119,7 @@ export default {
   overflow: scroll;
   width: 100%;
   height: 100%;
+
 }
 ::-webkit-scrollbar {
   display: none;
