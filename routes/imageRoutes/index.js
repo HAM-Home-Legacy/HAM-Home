@@ -24,10 +24,10 @@ router.post("/", upload, function (req, res) {
     } else if (err) {
       // An unknown error occurred when uploading.
     }
-    res.json({
-      success: true,
-      message: "Image Uploaded",
-    });
+    // res.json({
+    //   success: true,
+    //   message: "Image Uploaded",
+    // });
 
     // Everything went fine.
   });
