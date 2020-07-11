@@ -61,7 +61,7 @@
       <div class="mycustom">
         <label for="range-1">Price/Month</label>
         <b-form-input id="range-1" v-model="form.price" type="range" min="0" max="1500" step="10"></b-form-input>
-        <div class="mt-2">Value: {{ form.price }}</div>
+        <div class="mt-2">Value: {{ form.price }} TND</div>
       </div>
 
       <!-- <div class="myinput">
@@ -86,28 +86,21 @@
         />
       </div>
 
-      <img :src="form.imageURL" height="150" /> -->
-      <b-button class="createform-submit" type="submit" variant="primary"
-        >Submit</b-button
-      >
+      <img :src="form.imageURL" height="150" />-->
+      <b-button class="createform-submit" type="submit" variant="primary">Submit</b-button>
     </b-form>
 
-    <form action="http://localhost:3000/api/image" method="POST" enctype="multipart/form-data">
-      <label for="postImage">PHOTO</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        placeholder="Description"
-        required
-      />
-      <input
-        type="file"
-        name="postImage"
-        id="postImage"
-        @change="onFilePicked"
-      />
-      <input type="submit" value="upload" />
+    <form
+      class="ch"
+      action="http://localhost:3000/api/image"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label for="postImage">Upload Your Post Image</label>
+      <br />
+
+      <input type="file" name="postImage" id="postImage" @change="onFilePicked" />
+      <input class="butt" type="submit" value="upload" />
     </form>
 
     <!-- <pre class="mt-3 mb-0">{{ text }}</pre> -->
@@ -115,49 +108,46 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'TextFields',
+  name: "TextFields",
   data() {
     return {
       form: {
-        title: '',
-        numberOfRooms: '',
+        title: "",
+        numberOfRooms: "",
         state: null,
-        description: '',
-        price: '0',
         description: "",
         price: "0"
       },
       states: [
-
-        { text: 'Select One', value: null },
-        'Ariana',
-        'Tunis',
-        'Ben Arous',
-        'Bizerte',
-        'Gabès',
-        'Gafsa',
-        'Jendouba',
-        'Kairouan',
-        'Kasserine',
-        'Kébili',
-        'Le Kef',
-        'Mahdia',
-        'La Manouba',
-        'Médenine',
-        'Monastir',
-        'Nabeul',
-        'Sfax',
-        'Sidi Bouzid',
-        'Siliana',
-        'Sousse',
-        'Tataouine',
-        'Tozeur',
-        'Béja',
-        'Zaghouan',
+        { text: "Select One", value: null },
+        "Ariana",
+        "Tunis",
+        "Ben Arous",
+        "Bizerte",
+        "Gabès",
+        "Gafsa",
+        "Jendouba",
+        "Kairouan",
+        "Kasserine",
+        "Kébili",
+        "Le Kef",
+        "Mahdia",
+        "La Manouba",
+        "Médenine",
+        "Monastir",
+        "Nabeul",
+        "Sfax",
+        "Sidi Bouzid",
+        "Siliana",
+        "Sousse",
+        "Tataouine",
+        "Tozeur",
+        "Béja",
+        "Zaghouan"
       ],
-      show: true,
+      show: true
     };
   },
   methods: {
@@ -165,10 +155,10 @@ export default {
       evt.preventDefault();
       axios
         .post(`http://localhost:3000/api/posts/createPost`, this.form)
-        .then((response) => {
+        .then(response => {
           console.log(response);
         })
-        .catch((err) => console.log('Error', err));
+        .catch(err => console.log("Error", err));
     },
     // onFileSelected(event) {
     //   this.form.file = event.target.files[0];
@@ -180,11 +170,11 @@ export default {
     onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
-      if (filename.lastIndexOf('.') <= 0) {
-        return alert('Please add a valid file');
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file");
       }
       const fileReader = new window.FileReader();
-      fileReader.addEventListener('load', () => {
+      fileReader.addEventListener("load", () => {
         this.form.imageURL = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
@@ -195,15 +185,23 @@ export default {
 };
 </script>
 <style scoped>
+.ch {
+  margin-top: 40px;
+}
 .createform-container {
   width: 800px;
   border: 2px solid gray;
+  border-radius: 5px;
   margin: 2px auto;
   overflow: hidden;
+  background-color: white;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: black;
 }
 .createform-submit {
   float: right;
-  margin: 10px;
+  margin: 40px 0 0 0;
+  background-color: green;
 }
 .myinput {
   width: 400px;
@@ -212,5 +210,10 @@ export default {
 .mycustom {
   width: 600px;
   margin: 30px;
+}
+.butt {
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
 }
 </style>
