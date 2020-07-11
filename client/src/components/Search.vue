@@ -71,6 +71,12 @@
       <div v-for="(post, index) in posts" :key="index">
         <postView v-if="showPost" :post="post" />
       </div>
+      <div id='post-view-div'>
+          <div  v-for="(post,index) in posts" :key='index'>
+            <postView :post="post"/>
+          </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -88,6 +94,15 @@ export default {
     showPost: false,
     posts: [],
   }),
+  async beforeMount(){
+    try{
+      let posts = await axios.post('http://localhost:3000/api/posts',{})
+      this.posts = posts.data
+    }
+    catch(error){
+      console.log(error)
+      }
+  },
   methods: {
     async showPostFunction() {
       let obj = {};
@@ -106,26 +121,41 @@ export default {
       );
       this.posts = filteredPosts.data;
       this.showPost = true;
+      console.log(this.posts)
     },
   },
 };
 </script>
 
 <style>
+#post-view-div{
+  overflow:scroll;
+  width:100%;
+  height:100%
+}
+::-webkit-scrollbar {
+display: none;
+}
 .md-layout {
   background-color: gray;
 }
 #search-component-container {
   margin: auto;
-  position: relative;
-  top: 30%;
+  position: fixed;
+  top: 0%;
   height: 100vh;
+  margin-top:100px;
+  width:98%;
+  overflow:hidden;
 }
 #SearchBtn {
   float: right;
+  margin-top:25px;
+  margin-right:30px;
 }
 #Single-Post-Container {
   width: 50%;
   float: right;
 }
+
 </style>

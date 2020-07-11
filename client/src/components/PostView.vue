@@ -1,5 +1,6 @@
 <template>
   <div class="PostView">
+
     <div id="without-extra">
       <md-card>
         <md-card-media>
@@ -15,21 +16,18 @@
             <div id="priceInfo">Price: {{ post.price }}$</div>
 
             <br />
-            <div id="addressInfo">
-              This house Has {{ post.numberOfRooms }} rooms
-            </div>
-          </div>
-        </md-card-header>
+            <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
+          
+        </div>
+        <br />
+      </md-card-header>
         <md-card-actions md-alignment="space-between">
-          <router-link id="readMoreBtn" to="/user/singlePost">
-            <md-button @click="showSinglePostFunction">Read more</md-button>
-          </router-link>
+        <router-link :to="{path:`/user/${post._id}` }" id="readMoreBtn">
+          <md-button @click="showSinglePostFunction">Read more</md-button>
+        </router-link>
         </md-card-actions>
-      </md-card>
-      <div v-for="(post, index) in posts" :key="index">
-        <SinglePost v-if="showSinglePost" :post="post" />
-      </div>
-    </div>
+    </md-card>
+      <SinglePost v-if="showSinglePost" :post="post"/>
   </div>
 </template>
 
@@ -54,9 +52,10 @@ export default {
 </script>
 
 <style>
-.PostView {
-  float: left;
-  width: 20%;
+.PostView{
+  float:left;
+  width:20%;
+  margin-top: 40px;
 }
 .md-card {
   width: 320px;

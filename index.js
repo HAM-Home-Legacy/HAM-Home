@@ -29,6 +29,8 @@ app.use(cors());
 app.use(express.static('uploads'));
 app.use(express.static('client/dist'));
 app.use(bodyParser.json({ limit: '100mb' }));
+app.use(express.static('uploads'))
+app.use(bodyParser.json());
 
 //users Route
 app.use('/api/users', routes.userRoutes);

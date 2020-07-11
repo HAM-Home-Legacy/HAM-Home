@@ -34,7 +34,7 @@ export default new Router({
       ],
     },
     {
-      path: "/user",
+      path: "/:id",
       name: "user",
       component: UserProfile,
       children: [
@@ -63,9 +63,9 @@ export default new Router({
           component: Search,
         },
         {
-          path: "singlePost",
+          path: ":id",
           component: singlePost,
-          props: true
+          props: true,
         },
       ],
     },

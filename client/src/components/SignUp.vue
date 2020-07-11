@@ -16,13 +16,13 @@
       ></b-form-input>
     </b-form-group>
     <b-form-group id="fieldset-1" label="Enter Your Gender" label-for="input-7">
-      <b-select placeholder="Select Your Gender">
-        <b-select-option v-model="gender">
+      <b-select v-model="gender" placeholder="Select Your Gender">
+        <option>
           Male
-        </b-select-option>
-        <b-select-option v-model="gender">
+        </option>
+        <option>
           Female
-        </b-select-option>
+        </option>
       </b-select>
     </b-form-group>
     <b-form-group
@@ -95,9 +95,9 @@
     </b-form-group>
     <b-form-group id="fieldset-1" label="Enter Your State" label-for="input-5">
       <b-select v-model="state">
-        <b-select-option v-for="(city, index) in cities" :key="index">
-          {{ city }}
-        </b-select-option>
+        <option v-for="(city, index) in cities" :key="index"
+          >{{ city }}
+        </option>
       </b-select>
     </b-form-group>
     <b-form-group
@@ -203,8 +203,9 @@ export default {
             address: this.address,
             phoneNumber: this.phoneNumber,
           };
-          let user = await axios.post("api/users/createUser", userToCreate);
-          console.log(user);
+          await axios.post("api/users/createUser", userToCreate);
+          localStorage.setItem("email", this.email);
+          //   this.$router.push(`${}._id}`);
         }
       }
     },

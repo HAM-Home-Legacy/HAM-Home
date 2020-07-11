@@ -7,16 +7,20 @@
             <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
               <md-icon>menu</md-icon>
             </md-button>
-            <router-link class="tab-button-contain2" to="/user">
+            <!-- <router-link class="tab-button-contain2" to="/user"> -->
+            <md-button id="home-button" @click="directHome">
               <md-avatar class="md-avatar-icon">
                 <md-icon>home</md-icon>
               </md-avatar>
-            </router-link>
-            <router-link class="tab-button-contain2" to="/user/search">
+            </md-button>
+            <!-- </router-link> -->
+            <!-- <router-link class="tab-button-contain2" to="/user/search"> -->
+            <md-button id="search-button" @click="directSearch">
               <md-avatar class="md-avatar-icon">
                 <md-icon>search</md-icon>
               </md-avatar>
-            </router-link>
+            </md-button>
+            <!-- </router-link> -->
           </div>
 
           <div class="md-toolbar-section-end">
@@ -26,18 +30,18 @@
 
         <div class="md-toolbar-row">
           <div class="md-button-container">
-            <router-link class="tab-button-contain" to="/user/infos">
-              <md-button class="tab-button">Infos</md-button>
-            </router-link>
-            <router-link class="tab-button-contain" to="/user/makepost">
-              <md-button class="tab-button">Make A Post</md-button>
-            </router-link>
-            <router-link class="tab-button-contain" to="/user/posts">
-              <md-button class="tab-button">Posts</md-button>
-            </router-link>
-            <router-link class="tab-button-contain" to="/user/saved">
-              <md-button class="tab-button">Saved</md-button>
-            </router-link>
+            <!-- <router-link class="tab-button-contain" to="/user/infos"> -->
+            <md-button @click="directInfos" class="tab-button">Infos</md-button>
+            <!-- </router-link> -->
+            <!-- <router-link class="tab-button-contain" to="/user/makepost"> -->
+            <md-button @click="directMakePost" class="tab-button">Make A Post</md-button>
+            <!-- </router-link> -->
+            <!-- <router-link class="tab-button-contain" to="/user/posts"> -->
+            <md-button @click="directPosts" class="tab-button">Posts</md-button>
+            <!-- </router-link> -->
+            <!-- <router-link class="tab-button-contain" to="/user/saved"> -->
+            <md-button @click="directSaved" class="tab-button">Saved</md-button>
+            <!-- </router-link> -->
           </div>
         </div>
       </md-app-toolbar>
@@ -90,6 +94,24 @@ export default {
     logout() {
       localStorage.clear();
       this.$router.push("/");
+    },
+    directSearch() {
+      this.$router.push(`/${localStorage.id}/search`);
+    },
+    directInfos() {
+      this.$router.push(`/${localStorage.id}/infos`);
+    },
+    directMakePost() {
+      this.$router.push(`/${localStorage.id}/makepost`);
+    },
+    directPosts() {
+      this.$router.push(`/${localStorage.id}/posts`);
+    },
+    directSaved() {
+      this.$router.push(`/${localStorage.id}/saved`);
+    },
+    directHome() {
+      this.$router.push(`/${localStorage.id}`);
     }
   }
 };
@@ -98,15 +120,24 @@ export default {
 <style scoped>
 .page-container {
   height: 100vh;
+  overflow:hidden;
 }
 .appContent {
   height: 89vh;
+  overflow:hidden;
+}
+#home-button,
+#search-button {
+  background-color: #098afb !important;
+  height: 40px !important;
+  width: 40px !important;
+  min-width: 10px;
+  border-radius: 60px !important;
 }
 .md-button-container {
   display: flex;
   justify-content: space-around;
   width: 97%;
-
   margin: 0 auto;
 }
 .tab-button-contain {
