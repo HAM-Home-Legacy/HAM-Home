@@ -9,8 +9,8 @@ module.exports = {
       { email: userAccount.email, phoneNumber: userAccount.phoneNumber },
       (err, docs) => {
         if (docs.length > 0) {
-        console.log(docs);
-        return "User Exists";
+          console.log(docs);
+          return "User Exists";
         } else {
           return Users.create(userAccount);
         }
@@ -25,5 +25,19 @@ module.exports = {
   },
   async findUser(user) {
     return Users.find(user);
+  },
+  async addPost(object) {
+    return Users.find({ email: object.email }, (err, docs) => {
+      if (docs[0].posts === "") {
+        var posts = JSON.stringify(object.post);
+      } else {
+        var posts = docs[0].posts + "," + JSON.stringify(object.post);
+      }
+      Users.updateOne({ email: object.email }, { posts }, (err) => {
+        if (!err) {
+          console.log("user updated");
+        }
+      });
+    });
   },
 };

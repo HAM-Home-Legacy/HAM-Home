@@ -37,12 +37,7 @@
 
       <div class="myinput">
         <b-form-group id="input-group-3" label="State:" label-for="input-3">
-          <b-form-select
-            id="input-3"
-            v-model="form.state"
-            :options="states"
-            required
-          ></b-form-select>
+          <b-form-select id="input-3" v-model="form.state" :options="states" required></b-form-select>
         </b-form-group>
       </div>
 
@@ -65,14 +60,7 @@
 
       <div class="mycustom">
         <label for="range-1">Price/Month</label>
-        <b-form-input
-          id="range-1"
-          v-model="form.price"
-          type="range"
-          min="0"
-          max="1500"
-          step="10"
-        ></b-form-input>
+        <b-form-input id="range-1" v-model="form.price" type="range" min="0" max="1500" step="10"></b-form-input>
         <div class="mt-2">Value: {{ form.price }}</div>
       </div>
 
@@ -85,7 +73,7 @@
           @change="onFileSelected"
         ></b-form-file>
         <input type="file" style="display:none" />
-      </div> -->
+      </div>-->
 
       <!-- <div class="myinput">
         <b-button variant="primary" @click="onPickFile">Upload Image</b-button>
@@ -97,17 +85,14 @@
           @change="onFilePicked"
         />
       </div>
+
       <img :src="form.imageURL" height="150" /> -->
       <b-button class="createform-submit" type="submit" variant="primary"
         >Submit</b-button
       >
     </b-form>
 
-    <form
-      action="http://localhost:3000/api/image"
-      method="POST"
-      enctype="multipart/form-data"
-    >
+    <form action="http://localhost:3000/api/image" method="POST" enctype="multipart/form-data">
       <label for="postImage">PHOTO</label>
       <input
         type="text"
@@ -124,10 +109,6 @@
       />
       <input type="submit" value="upload" />
     </form>
-
-    <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card>
 
     <!-- <pre class="mt-3 mb-0">{{ text }}</pre> -->
   </div>
@@ -146,11 +127,10 @@ export default {
         description: '',
         price: '0',
         description: "",
-        price: "0",
-        imageURL: "",
-        image: null,
+        price: "0"
       },
       states: [
+
         { text: 'Select One', value: null },
         'Ariana',
         'Tunis',
@@ -210,8 +190,8 @@ export default {
       fileReader.readAsDataURL(files[0]);
       this.form.image = files[0].name;
       console.log(this.form.image);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

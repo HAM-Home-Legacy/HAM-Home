@@ -11,6 +11,7 @@ var usersSchema = new Schema({
   state: String,
   address: String,
   phoneNumber: { type: String, unique: true },
+  posts: String,
 });
 
 module.exports = mongoose.model("Users", usersSchema);

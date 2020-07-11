@@ -45,25 +45,29 @@
   </div>
 </template>
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "SinglePost",
   data: () => ({
     city: "",
     NumberOfRooms: null,
     price: null,
-    post: []
+    post: null,
+    postOwner: null
   }),
-  async beforeMount(){
-    let id = window.location.pathname.slice(6)
-    let foundPost = await axios.post("/api/posts/search", {_id:id});
-    this.post = foundPost.data[0]
+  async beforeMount() {
+    let id = window.location.pathname.split("/")[2];
+    let foundPost = await axios.post("/api/posts/search", { _id: id });
+    this.post = foundPost.data[0];
+    let postOwner = await axios.post("/api/users/user", {
+      email: this.post.email
+    });
+    this.postOwner = postOwner.data[0];
   },
   methods: {
-    close(){
-      this.showPost = false
-    },
- 
+    close() {
+      this.showPost = false;
+    }
   }
 };
 </script>
