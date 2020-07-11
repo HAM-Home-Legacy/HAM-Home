@@ -1,6 +1,5 @@
 <template>
   <div class="PostView">
-
     <div id="without-extra">
       <md-card>
         <md-card-media>
@@ -18,44 +17,58 @@
             <br />
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
           </div>
-        </div>
-        <br />
-      </md-card-header>
-        <md-card-actions md-alignment="space-between">
-        <router-link :to="{path:`/user/${post._id}` }" id="readMoreBtn">
-          <md-button @click="showSinglePostFunction">Read more</md-button>
-        </router-link>
+          <br />
+        </md-card-header>
+        <md-card-actions class="buttonsContain" md-alignment="space-between">
+          <!-- <router-link :to="{path:`/${localStorage.id}/${post._id}` }" id="readMoreBtn"> -->
+          <!-- </router-link> -->
+          <md-button id="saveBtn" @click="savePost" v-if="!owner">Save</md-button>
+          <md-button id="readMoreBtn" @click="showSinglePostFunction">Read more</md-button>
         </md-card-actions>
-    </md-card>
-      <SinglePost v-if="showSinglePost" :post="post"/>
+      </md-card>
+      <!-- <SinglePost v-if="showSinglePost" :post="post" /> -->
+    </div>
+
   </div>
 </template>
 
 <script>
-import SinglePost from './SinglePost.vue';
+import axios from "axios";
 export default {
-  name: 'PostView',
-  components: { SinglePost },
-  props: ['post'],
+  name: "PostView",
+  props: ["post", "owner"],
+
   data: () => ({
     showSinglePost: false,
     city: null,
     numberOfRooms: null,
-    price: null,
+    price: null
+
   }),
   methods: {
     showSinglePostFunction() {
       this.showSinglePost = true;
+      this.$router.push(`/${localStorage.id}/${this.post._id}`);
     },
-  },
+    savePost() {
+      axios.post("/api/users/savePosts", {
+        email: localStorage.email,
+        post: this.post
+      });
+    }
+  }
 };
 </script>
 
 <style>
-.PostView{
-  float:left;
-  width:20%;
+.PostView {
+  float: left;
+  width: 20%;
   margin-top: 40px;
+}
+.buttonsContain {
+  width: 100%;
+  margin-top: 90px;
 }
 .md-card {
   width: 320px;
@@ -71,12 +84,13 @@ export default {
   font-size: 20px;
   color: white;
 }
+#readMoreBtn,
+#saveBtn {
+  border: 2px solid white;
+}
 #readMoreBtn {
-  margin: auto;
-  position: relative;
-  top: 50%;
-  margin-top: 50px;
-  margin-left: 200px;
+  float: right;
+
 }
 #extra {
   z-index: 1;
