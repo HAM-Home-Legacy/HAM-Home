@@ -6,7 +6,7 @@
           <md-field>
             <label for="city">City</label>
             <md-select v-model="city" name="city" id="City">
-              <md-option value="">All</md-option>
+              <md-option value>All</md-option>
               <md-option value="Tunis">Tunis</md-option>
               <md-option value="Ben Arous">Ben Arous</md-option>
               <md-option value="Bizerte">Bizerte</md-option>
@@ -37,7 +37,7 @@
 
         <div class="md-layout-item">
           <md-field>
-          <label for="Number Of Rooms">Number Of Rooms</label>
+            <label for="Number Of Rooms">Number Of Rooms</label>
             <md-input
               v-model="numberOfRooms"
               name="Number Of Rooms"
@@ -54,14 +54,13 @@
             <md-input v-model="price" name="price" id="price" type="number" step="100"></md-input>
           </md-field>
         </div>
-      <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
+        <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
       </div>
-      <div id='post-view-div'>
-          <div  v-for="(post,index) in posts" :key='index'>
-            <postView :post="post"/>
-          </div>
+      <div id="post-view-div">
+        <div v-for="(post,index) in posts" :key="index">
+          <postView :post="post" :owner="false" />
+        </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -80,44 +79,43 @@ export default {
     showPost: false,
     posts: []
   }),
-  async beforeMount(){
-    try{
-      let posts = await axios.post('http://localhost:3000/api/posts',{})
-      this.posts = posts.data
+  async beforeMount() {
+    try {
+      let posts = await axios.post("http://localhost:3000/api/posts", {});
+      this.posts = posts.data;
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-      }
   },
   methods: {
     async showPostFunction() {
-      let obj = {}
-      if(this.city !== "") {
-        obj["state"]= this.city
+      let obj = {};
+      if (this.city !== "") {
+        obj["state"] = this.city;
       }
-      if(this.numberOfRooms !== "") {
-        obj["numberOfRooms"]= this.numberOfRooms
+      if (this.numberOfRooms !== "") {
+        obj["numberOfRooms"] = this.numberOfRooms;
       }
-      if(this.price !== "") {
-       obj["price"]= this.price
+      if (this.price !== "") {
+        obj["price"] = this.price;
       }
-      let filteredPosts = await axios.post("/api/posts/search",obj);
+      let filteredPosts = await axios.post("/api/posts/search", obj);
       this.posts = filteredPosts.data;
       this.showPost = true;
-      console.log(this.posts)
-    },
-  },
+      console.log(this.posts);
+    }
+  }
 };
 </script>
 
-<style>
-#post-view-div{
-  overflow:scroll;
-  width:100%;
-  height:100%
+<style scoped>
+#post-view-div {
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
 }
 ::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 .md-layout {
   background-color: gray;
@@ -127,18 +125,17 @@ display: none;
   position: fixed;
   top: 0%;
   height: 100vh;
-  margin-top:100px;
-  width:98%;
-  overflow:hidden;
+  margin-top: 100px;
+  width: 98%;
+  overflow: hidden;
 }
 #SearchBtn {
   float: right;
-  margin-top:25px;
-  margin-right:30px;
+  margin-top: 25px;
+  margin-right: 30px;
 }
 #Single-Post-Container {
   width: 50%;
   float: right;
 }
-
 </style>

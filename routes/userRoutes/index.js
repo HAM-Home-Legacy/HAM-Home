@@ -43,4 +43,12 @@ router.post("/checkUser", async (req, res) => {
     res.send(error);
   }
 });
+router.post("/savePosts", async (req, res) => {
+  try {
+    const user = await services.userService.addPost(req.body);
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = router;

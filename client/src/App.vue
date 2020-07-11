@@ -14,10 +14,8 @@ export default {
 <style>
 body {
   background-color: transparent !important;
-  overflow:hidden
 }
 html {
-  overflow: hidden;
   background-color: transparent !important;
 }
 

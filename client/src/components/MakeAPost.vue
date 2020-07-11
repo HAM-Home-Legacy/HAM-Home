@@ -9,13 +9,18 @@
 import Form from "../components/Form.vue";
 export default {
   components: {
-    Form,
+    Form
   },
-  name: "PostCreation",
+  name: "PostCreation"
 };
 </script>
 
-<style>
+<style scoped>
+.appContent,
+.page-container {
+  height: 89vh;
+  overflow: scroll !important;
+}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
 }

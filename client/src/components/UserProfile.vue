@@ -120,11 +120,11 @@ export default {
 <style scoped>
 .page-container {
   height: 100vh;
-  overflow:hidden;
+  /* overflow:hidden; */
 }
 .appContent {
   height: 89vh;
-  overflow:hidden;
+  /* overflow:hidden; */
 }
 #home-button,
 #search-button {
