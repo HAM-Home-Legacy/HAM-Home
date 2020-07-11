@@ -45,7 +45,6 @@ router.post('/', upload, function (req, res) {
     } else if (err) {
       // An unknown error occurred when uploading.
     }
-
     // Everything went fine.
   });
   req.body.photo = req.file.filename;

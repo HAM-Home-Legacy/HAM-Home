@@ -73,7 +73,7 @@
       </div>
       <div id='post-view-div'>
           <div  v-for="(post,index) in posts" :key='index'>
-            <postView :post="post"/>
+            <PostView :post="post"/>
           </div>
       </div>
 
@@ -127,7 +127,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #post-view-div{
   overflow:scroll;
   width:100%;
