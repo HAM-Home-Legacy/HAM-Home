@@ -3,36 +3,58 @@ const express = require('express');
 const router = express.Router();
 const services = require('../../services');
 
-const multer = require('multer');
 const path = require('path');
 const Image = require('../../models/image');
+
+const multer = require('multer');
+// const { memory } = require('console');
+// const multerConf = {
+//   storage: multer.diskStorage({
+//     destination: function (req, file, next) {
+//       next(null, './public/images');
+//     },
+//     filename: function (req, file, next) {
+//       const ext = file.mimetype.split('/')[1];
+//       next(null, file.fieldname + '-' + Date.now() + '.' + ext);
+//     },
+//   }),
+// };
+
+// router.post('/', multer(multerConf).single('photo'), function (req, res) {
+//   if(req.file) {
+//     con
+//     req.body.photo = req.file.filename
+//   }
+// });
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    cb(null, file.originalname);
   },
 });
 
 var upload = multer({ storage: storage }).single('postImage');
 
-router.post('/', function (req, res) {
+router.post('/', upload, function (req, res) {
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
     } else if (err) {
       // An unknown error occurred when uploading.
     }
-    res.json({
-      success: true,
-      message: 'Image Uploaded',
-    });
+   
     // Everything went fine.
   });
+  req.body.photo = req.file.filename;
+  const uploadImage = new Image(req.body).save();
 });
 
+// router.get('/', function (req, res) {
+//   res.sendFile()
+// });
 // router.get('/', function (req, res) {
 //   res.sendfile(path.resolve(__dirname, '/uploads/postImage-1594337174759.jpg'));
 // });
