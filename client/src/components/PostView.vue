@@ -1,51 +1,49 @@
 <template>
   <div class="PostView">
-  <div id='without-extra'>
-    <md-card>
-      <md-card-media>
-        <img
-          src="https://i2.au.reastatic.net/800x600/372f291aefc16b58741894f3e6997878d9bb3d7924243e7cc311487fc1340547/main.jpg"
-          alt="People"
-        />
-      </md-card-media>
+    <div id="without-extra">
+      <md-card>
+        <md-card-media>
+          <img :src="'http://localhost:3000/' + post.image" alt="People" />
+        </md-card-media>
 
-      <md-card-header>
-        <div class="md-title"></div>
-        <div class="md-subhead">
-        <div id="addressInfo">{{post.description}}</div>
-          <div id="stateInfo">{{post.state}}</div>
+        <md-card-header>
+          <div class="md-title"></div>
+          <div class="md-subhead">
+            <div id="addressInfo">{{ post.description }}</div>
+            <div id="stateInfo">{{ post.state }}</div>
             <br />
-            <div id="priceInfo">Price: {{post.price}}$</div>
+            <div id="priceInfo">Price: {{ post.price }}$</div>
 
             <br />
-            <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
-          
-        </div>
-      </md-card-header>
+            <div id="addressInfo">
+              This house Has {{ post.numberOfRooms }} rooms
+            </div>
+          </div>
+        </md-card-header>
         <md-card-actions md-alignment="space-between">
-        <router-link id="readMoreBtn" to="/user/singlePost">
-          <md-button @click="showSinglePostFunction">Read more</md-button>
-        </router-link>
+          <router-link id="readMoreBtn" to="/user/singlePost">
+            <md-button @click="showSinglePostFunction">Read more</md-button>
+          </router-link>
         </md-card-actions>
-    </md-card>
-    <div v-for="(post,index) in posts" :key='index'>
-      <SinglePost v-if="showSinglePost" :post="post"/>
+      </md-card>
+      <div v-for="(post, index) in posts" :key="index">
+        <SinglePost v-if="showSinglePost" :post="post" />
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-import SinglePost from "./SinglePost.vue";
+import SinglePost from './SinglePost.vue';
 export default {
-  name: "PostView",
+  name: 'PostView',
   components: { SinglePost },
-  props: ["post"],
+  props: ['post'],
   data: () => ({
     showSinglePost: false,
-    city : null,
-    numberOfRooms : null,
-    price: null
+    city: null,
+    numberOfRooms: null,
+    price: null,
   }),
   methods: {
     showSinglePostFunction() {
@@ -56,14 +54,14 @@ export default {
 </script>
 
 <style>
-.PostView{
-  float:left;
-  width:20%;
+.PostView {
+  float: left;
+  width: 20%;
 }
 .md-card {
   width: 320px;
   margin: 8px;
-  height:550px;
+  height: 550px;
   vertical-align: top;
 }
 .md-subhead {
@@ -81,15 +79,15 @@ export default {
   color: white;
   font-weight: bold;
 }
-#readMoreBtn{
+#readMoreBtn {
   margin: auto;
-  position:relative;
-  top:50%;
+  position: relative;
+  top: 50%;
   margin-top: 50px;
   margin-left: 200px;
 }
-#extra{
-  z-index:1
+#extra {
+  z-index: 1;
 }
 .aa2 {
   position: fixed; /* Stay in place */
@@ -108,7 +106,7 @@ p {
 }
 /* Modal Content/Box */
 .aa3 {
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   border-radius: 8px;
   margin: 25% auto;
   padding: 20px;
