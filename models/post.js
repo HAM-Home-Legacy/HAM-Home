@@ -21,7 +21,9 @@ const postSchema = new Schema({
   email: {
     type: String,
   },
-  imageId: { type: mongoose.Schema.Types.ObjectId, ref: Image.modelName },
+  image : {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Post', postSchema);

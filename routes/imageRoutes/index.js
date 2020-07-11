@@ -32,7 +32,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.jpg');
+    cb(null, file.originalname);
   },
 });
 
@@ -45,10 +45,7 @@ router.post('/', upload, function (req, res) {
     } else if (err) {
       // An unknown error occurred when uploading.
     }
-    res.json({
-      success: true,
-      message: 'Image Uploaded',
-    });
+   
     // Everything went fine.
   });
   req.body.photo = req.file.filename;

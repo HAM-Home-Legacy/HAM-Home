@@ -12,6 +12,7 @@
       <md-card-header>
         <div class="md-title"></div>
         <div class="md-subhead">
+        <div id="textInfo">
         <div id="TitleInfo">{{post.title}}</div>
         <br />
         <div id="DescriptionInfo">{{post.description}}</div>
@@ -22,7 +23,7 @@
 
             <br />
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
-          
+          </div>
         </div>
         <br />
       </md-card-header>
@@ -73,16 +74,9 @@ export default {
   height: 100px;
   max-height: 100px;
 }
-#priceInfo {
-  font-size: 25px;
+#textInfo {
+  font-size: 20px;
   color: white;
-  font-weight: bold;
-}
-
-#addressInfo {
-  font-size: 18px;
-  color: white;
-  font-weight: bold;
 }
 #readMoreBtn{
   margin: auto;
