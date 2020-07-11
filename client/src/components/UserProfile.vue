@@ -120,9 +120,11 @@ export default {
 <style scoped>
 .page-container {
   height: 100vh;
+  /* overflow:hidden; */
 }
 .appContent {
   height: 89vh;
+  /* overflow:hidden; */
 }
 #home-button,
 #search-button {
@@ -136,7 +138,6 @@ export default {
   display: flex;
   justify-content: space-around;
   width: 97%;
-
   margin: 0 auto;
 }
 .tab-button-contain {

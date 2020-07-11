@@ -202,6 +202,7 @@ export default {
             state: this.state,
             address: this.address,
             phoneNumber: this.phoneNumber,
+            posts: "",
           };
           await axios.post("api/users/createUser", userToCreate);
           localStorage.setItem("email", this.email);

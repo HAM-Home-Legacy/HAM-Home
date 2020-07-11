@@ -1,69 +1,83 @@
 <template>
   <div class="PostView">
-  <div id='without-extra'>
-    <md-card>
-      <md-card-media>
-        <img
-          src="https://i2.au.reastatic.net/800x600/372f291aefc16b58741894f3e6997878d9bb3d7924243e7cc311487fc1340547/main.jpg"
-          alt="People"
-        />
-      </md-card-media>
+    <div id="without-extra">
+      <md-card>
+        <md-card-media>
+          <img
+            src="https://www.realestate.com.au/blog/images/600x450-fit,progressive/2020/03/25104807/house-for-rent.jpg"
+            alt="People"
+            id="singlePost"
+          />
+        </md-card-media>
 
-      <md-card-header>
-        <div class="md-title"></div>
-        <div class="md-subhead">
-        <div id="addressInfo">{{post.description}}</div>
-          <div id="stateInfo">{{post.state}}</div>
+        <md-card-header>
+          <div class="md-title"></div>
+          <div class="md-subhead">
+            <div id="TitleInfo">{{post.title}}</div>
+            <br />
+            <div id="DescriptionInfo">{{post.description}}</div>
+            <br />
+            <div id="stateInfo">{{post.state}}</div>
             <br />
             <div id="priceInfo">Price: {{post.price}}$</div>
 
             <br />
             <div id="addressInfo">This house Has {{post.numberOfRooms}} rooms</div>
-          
-        </div>
-      </md-card-header>
-        <md-card-actions md-alignment="space-between">
-        <router-link id="readMoreBtn" to="/user/singlePost">
-          <md-button @click="showSinglePostFunction">Read more</md-button>
-        </router-link>
+          </div>
+          <br />
+        </md-card-header>
+        <md-card-actions class="buttonsContain" md-alignment="space-between">
+          <!-- <router-link :to="{path:`/${localStorage.id}/${post._id}` }" id="readMoreBtn"> -->
+          <!-- </router-link> -->
+          <md-button id="saveBtn" @click="savePost" v-if="!owner">Save</md-button>
+          <md-button id="readMoreBtn" @click="showSinglePostFunction">Read more</md-button>
         </md-card-actions>
-    </md-card>
-    <div v-for="(post,index) in posts" :key='index'>
-      <SinglePost v-if="showSinglePost" :post="post"/>
+      </md-card>
+      <!-- <SinglePost v-if="showSinglePost" :post="post" /> -->
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-import SinglePost from "./SinglePost.vue";
+import axios from "axios";
 export default {
   name: "PostView",
-  components: { SinglePost },
-  props: ["post"],
+  props: ["post", "owner"],
   data: () => ({
     showSinglePost: false,
-    city : null,
-    numberOfRooms : null,
+    city: null,
+    numberOfRooms: null,
     price: null
   }),
   methods: {
     showSinglePostFunction() {
       this.showSinglePost = true;
+      this.$router.push(`/${localStorage.id}/${this.post._id}`);
     },
-  },
+    savePost() {
+      axios.post("/api/users/savePosts", {
+        email: localStorage.email,
+        post: this.post
+      });
+    }
+  }
 };
 </script>
 
 <style>
-.PostView{
-  float:left;
-  width:20%;
+.PostView {
+  float: left;
+  width: 20%;
+  margin-top: 40px;
+}
+.buttonsContain {
+  width: 100%;
+  margin-top: 90px;
 }
 .md-card {
   width: 320px;
   margin: 8px;
-  height:550px;
+  height: 550px;
   vertical-align: top;
 }
 .md-subhead {
@@ -81,15 +95,15 @@ export default {
   color: white;
   font-weight: bold;
 }
-#readMoreBtn{
-  margin: auto;
-  position:relative;
-  top:50%;
-  margin-top: 50px;
-  margin-left: 200px;
+#readMoreBtn,
+#saveBtn {
+  border: 2px solid white;
 }
-#extra{
-  z-index:1
+#readMoreBtn {
+  float: right;
+}
+#extra {
+  z-index: 1;
 }
 .aa2 {
   position: fixed; /* Stay in place */
@@ -108,7 +122,7 @@ p {
 }
 /* Modal Content/Box */
 .aa3 {
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   border-radius: 8px;
   margin: 25% auto;
   padding: 20px;
