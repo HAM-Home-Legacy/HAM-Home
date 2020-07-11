@@ -37,7 +37,7 @@
 
         <div class="md-layout-item">
           <md-field>
-          <label for="Number Of Rooms">Number Of Rooms</label>
+            <label for="Number Of Rooms">Number Of Rooms</label>
             <md-input
               v-model="numberOfRooms"
               name="Number Of Rooms"
@@ -51,10 +51,25 @@
         <div class="md-layout-item">
           <md-field>
             <label for="price">Price</label>
-            <md-input v-model="price" name="price" id="price" type="number" step="100"></md-input>
+            <md-input
+              v-model="price"
+              name="price"
+              id="price"
+              type="number"
+              step="100"
+            ></md-input>
           </md-field>
         </div>
-      <md-button id="SearchBtn" class="md-primary md-raised" @click="showPostFunction">Search</md-button>
+      </div>
+
+      <md-button
+        id="SearchBtn"
+        class="md-primary md-raised"
+        @click="showPostFunction"
+        >Search</md-button
+      >
+      <div v-for="(post, index) in posts" :key="index">
+        <postView v-if="showPost" :post="post" />
       </div>
       <div id='post-view-div'>
           <div  v-for="(post,index) in posts" :key='index'>
@@ -67,18 +82,17 @@
 </template>
 
 <script>
-import axios from "axios";
-import PostView from "./PostView.vue";
-// import $ from 'jquery'
+import axios from 'axios';
+import PostView from './PostView.vue';
 export default {
-  name: "search",
+  name: 'search',
   components: { PostView },
   data: () => ({
-    city: "",
-    numberOfRooms: "",
-    price: "",
+    city: '',
+    numberOfRooms: '',
+    price: '',
     showPost: false,
-    posts: []
+    posts: [],
   }),
   async beforeMount(){
     try{
@@ -91,17 +105,20 @@ export default {
   },
   methods: {
     async showPostFunction() {
-      let obj = {}
-      if(this.city !== "") {
-        obj["state"]= this.city
+      let obj = {};
+      if (this.city !== '') {
+        obj['state'] = this.city;
       }
-      if(this.numberOfRooms !== "") {
-        obj["numberOfRooms"]= this.numberOfRooms
+      if (this.numberOfRooms !== '') {
+        obj['numberOfRooms'] = this.numberOfRooms;
       }
-      if(this.price !== "") {
-       obj["price"]= this.price
+      if (this.price !== '') {
+        obj['price'] = this.price;
       }
-      let filteredPosts = await axios.post("/api/posts/search",obj);
+      let filteredPosts = await axios.post(
+        'http://localhost:3000/api/posts/search',
+        obj
+      );
       this.posts = filteredPosts.data;
       this.showPost = true;
       console.log(this.posts)
